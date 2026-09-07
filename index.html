@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salones Cerro de las Allanadas - La Guardia de Jaén</title>
+    <!-- Enlace correcto a tu archivo CSS externo -->
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN (Usa las clases del CSS) -->
+    <header class="navbar">
+        <a href="#" class="nav-brand" onclick="cambiarVista('inicio'); return false;">
+            <span>Cerro de la Guardia (Jaén)</span>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><button onclick="cambiarVista('inicio')" id="nav-inicio" class="active" style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Inicio</button></li>
+                <li><button onclick="cambiarVista('salas')" id="nav-salas" style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Salas</button></li>
+                <li><button onclick="cambiarVista('detalle')" id="nav-detalle" style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Detalle Salón</button></li>
+                <li><button onclick="cambiarVista('reservas')" id="nav-reservas" style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Reservas</button></li>
+                <li><button onclick="cambiarVista('calendario')" id="nav-calendario" style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Calendario</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- VISTA 1: INICIO -->
+        <section id="vista-inicio" class="view-section active">
+            <div class="hero">
+                <h1>Portal de Salones - Cerro de la Guardia</h1>
+                <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn-primary" style="display: inline-block; width: auto; margin-right: 1rem;" onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
+                <button class="btn-primary" style="display: inline-block; width: auto; background-color: var(--color-deportivo);" onclick="cambiarVista('reservas')">Hacer una Reserva</button>
+            </div>
+        </section>
+
+        <!-- VISTA 2: SALAS (Usa CSS Grid con .grid-cards y .card) -->
+        <section id="vista-salas" class="view-section">
+            <h2>Salas disponibles</h2>
+            <div class="grid-cards">
+                <article class="card">
+                    <div>
+                        <h3>Sala 1</h3>
+                        <p><strong>Aforo:</strong> Máximo 30 personas.</p>
+                        <p><strong>Equipamiento:</strong> Baño, cocina, nevera, chimenea, sillas y mesas.</p>
+                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Sala preparada para reuniones, celebraciones y diferentes tipos de eventos.</p>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn-primary" onclick="cambiarVista('detalle')">Ver detalles</button>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div>
+                        <h3>Sala 2</h3>
+                        <p><strong>Aforo:</strong> Máximo 30 personas.</p>
+                        <p><strong>Equipamiento:</strong> Baño, cocina, nevera, chimenea, sillas y mesas.</p>
+                        <p style="color: var(--text-muted); margin-top: 0.5rem;">Sala preparada para reuniones, celebraciones y diferentes tipos de eventos.</p>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn-primary" onclick="cambiarVista('detalle')">Ver detalles</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- VISTA 3: DETALLE SALÓN -->
+        <section id="vista-detalle" class="view-section">
+            <p style="margin-bottom: 1rem;"><a href="#" onclick="cambiarVista('salas'); return false;" style="color: var(--color-accent); text-decoration: none; font-weight: bold;">&larr; Volver al listado de espacios</a></p>
+            
+            <div class="card">
+                <header>
+                    <h1 style="color: var(--color-accent);">Salón del Trono</h1>
+                </header>
+
+                <section style="margin-top: 1rem;">
+                    <h3>Información General</h3>
+                    <p><strong>Aforo máximo:</strong> 150 personas</p>
+                    <p><strong>Descripción:</strong> Espacio histórico amplio diseñado para recepciones solemnes, visitas guiadas privadas y eventos institucionales.</p>
+                </section>
+
+                <section style="margin-top: 1rem;">
+                    <h3>Características</h3>
+                    <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                        <li>Climatización e iluminación adaptada.</li>
+                        <li>Acceso para personas con movilidad reducida.</li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+        <!-- VISTA 4: RESERVAS (Usa las clases .form-group y .form-control del CSS) -->
+        <section id="vista-reservas" class="view-section">
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--color-accent); margin-bottom: 1.5rem; text-align: center;">Hacer una Reserva</h2>
+                <form onsubmit="event.preventDefault(); alert('¡Reserva registrada con éxito!');">
+                    <div class="form-group">
+                        <label for="salon-reserva">Selecciona el Salón:</label>
+                        <select id="salon-reserva" class="form-control" required>
+                            <option value="">-- Seleccionar Salón --</option>
+                            <option value="Salon Principal">Salón Principal</option>
+                            <option value="Salon Mirador">Salon Mirador</option>
+                            <option value="Salon de Eventos">Salon de Eventos</option>
+                            <option value="Salon del Trono">Salón del Trono</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Tu nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha de Reserva:</label>
+                        <input type="date" id="fecha" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora">Hora:</label>
+                        <input type="time" id="hora" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 1rem;">Confirmar Reserva</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- VISTA 5: CALENDARIO -->
+        <section id="vista-calendario" class="view-section">
+            <div class="card" style="text-align: center;">
+                <h2>Calendario de Disponibilidad</h2>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Consulta aquí el calendario general de eventos para planificar tu reserva con antelación.</p>
+                <div style="margin: 30px 0; padding: 40px; background: #f4f6f9; border-radius: 8px; color: var(--text-muted);">
+                    [ Visualizador de Calendario Interactivo / Mes Actual ]
+                </div>
+                <p><a href="#" onclick="cambiarVista('reservas'); return false;" style="color: var(--color-accent); font-weight: bold; text-decoration: underline;">Ir al formulario de reservas &rarr;</a></p>
+            </div>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 Sistema de Gestión de Reservas - Cerro de la Guardia.</p>
+    </footer>
+
+    <!-- Script de control de pestañas -->
+    <script>
+        function cambiarVista(vistaId) {
+            // Ocultar todas las secciones
+            const secciones = document.querySelectorAll('.view-section');
+            secciones.forEach(sec => sec.classList.remove('active'));
+
+            // Quitar clase active a todos los botones del nav
+            const botones = document.querySelectorAll('.nav-links button');
+            botones.forEach(btn => btn.classList.remove('active'));
+
+            // Mostrar la sección seleccionada y activar su botón correspondiente
+            document.getElementById('vista-' + vistaId).classList.add('active');
+            const btnTarget = document.getElementById('nav-' + vistaId);
+            if(btnTarget) btnTarget.classList.add('active');
+
+            // Subir arriba de la página suavemente
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>

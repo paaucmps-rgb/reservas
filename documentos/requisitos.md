@@ -64,3 +64,5 @@ RNF3. Los datos de usuarios y reservas deberán almacenarse de forma segura.
 RNF4. La aplicación deberá estar disponible las 24 horas del día.
 
 RNF5. El tiempo de respuesta de las consultas deberá ser inferior a 3 segundos en condiciones normales.
+
+https://canva.link/jlagf4bzqmbkwcj
