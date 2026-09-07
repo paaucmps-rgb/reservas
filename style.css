@@ -71,7 +71,21 @@ main > h2 {
     font-size: 30px;
     margin-bottom: 35px;
 }
+:root{
+    --color-salas:#ff9300;
+    ...
+}
 
+.contenedor-salones{
+   ...
+}
+
+.card-salon{
+   ...
+}
+
+/* media queries */
+@media (...)
 
 /* =========================
    SALAS
