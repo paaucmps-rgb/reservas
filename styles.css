@@ -1,0 +1,69 @@
+:root {
+    --color-deportivo: #2563eb;
+    --color-castillo: #b45309;
+    --color-salas: #28a745;
+
+    --color-fondo: #f9f9f9;
+    --color-blanco: #ffffff;
+    --color-texto: #333333;
+    --color-borde: #cccccc;
+
+    --radio: 8px;
+    --sombra: 0 0 10px rgba(0, 0, 0, 0.1);
+    --fuente-principal: Arial, sans-serif;
+}
+
+body {
+    font-family: var(--fuente-principal);
+    margin: 40px;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.container {
+    max-width: 400px;
+    background-color: var(--color-blanco);
+    padding: 20px;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    margin: 0 auto;
+}
+
+h2 {
+    text-align: center;
+    color: var(--color-texto);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    background-color: var(--color-salas);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
