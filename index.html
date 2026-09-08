@@ -5,34 +5,354 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salones Cerro de las Allanadas - La Guardia de Jaén</title>
-    <!-- Enlace correcto a tu archivo CSS externo -->
-    <link rel="stylesheet" href="style/style.css">
+    <style>
+        /* ==========================================================================
+           1. IDENTIDAD VISUAL Y VARIABLES CSS (Unificadas)
+           ========================================================================== */
+        :root {
+          --bg-primary: #fdfaf6;
+          --bg-card: #ffffff;
+          --text-main: #2d2d2d;
+          --text-muted: #666666;
+          
+          --color-deportivo: #2b6cb0;
+          --color-castillo: #8c2d19;
+          --color-salas: #e67e22;
+          
+          --color-accent: var(--color-salas);
+          --color-accent-hover: #d35400;
+          --border-radius: 12px;
+          --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+          --color-blanco: #ffffff;
+          --color-borde: #cccccc;
+          --radio: 8px;
+          --sombra: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==========================================================================
+           2. REINICIO Y BOX MODEL
+           ========================================================================== */
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          font-family: var(--font-family);
+          background-color: var(--bg-primary);
+          color: var(--text-main);
+          line-height: 1.6;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* ==========================================================================
+           3. GESTIÓN DE VISTAS (Sistema de Pestañas SPA)
+           ========================================================================== */
+        .view-section {
+          display: none;
+        }
+
+        .view-section.active {
+          display: block;
+          animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           4. NAVEGACIÓN Y FLEXBOX
+           ========================================================================== */
+        header.navbar {
+          background-color: #ffffff;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 2rem;
+          border-bottom: 1px solid #eee;
+        }
+
+        .nav-brand span {
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: var(--color-accent);
+          text-decoration: none;
+        }
+
+        .nav-links {
+          list-style: none;
+          display: flex;
+          gap: 1rem;
+        }
+
+        nav button {
+          background: transparent;
+          border: none;
+          color: var(--text-main);
+          font-weight: 600;
+          padding: 0.5rem 1rem;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          font-size: 0.95rem;
+        }
+
+        nav button:hover {
+          background-color: rgba(230, 126, 34, 0.1);
+          color: var(--color-accent);
+        }
+
+        nav button.active {
+          background-color: var(--color-accent);
+          color: #ffffff;
+        }
+
+        /* ==========================================================================
+           5. ESTRUCTURA PRINCIPAL Y CSS GRID
+           ========================================================================== */
+        .container {
+          max-width: 1200px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 2.5rem 1.5rem;
+          flex-grow: 1;
+        }
+
+        .hero {
+          text-align: center;
+          padding: 3rem 1.5rem;
+          background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
+          background-size: cover;
+          background-position: center;
+          color: white;
+          border-radius: var(--border-radius);
+          margin-bottom: 2rem;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+          font-size: 2.2rem;
+          margin-bottom: 0.75rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+          max-width: 700px;
+          margin: 0 auto;
+        }
+
+        .grid-cards {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+          margin-top: 2rem;
+        }
+
+        /* ==========================================================================
+           6. COMPONENTES: CARDS, BOTONES Y FORMULARIOS
+           ========================================================================== */
+        .card {
+          background: var(--bg-card);
+          border-radius: var(--border-radius);
+          padding: 1.8rem;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+          border: 1px solid #eee;
+          margin-bottom: 1.5rem;
+        }
+
+        .card h2, .card h3 {
+          color: var(--color-accent);
+          margin-bottom: 0.75rem;
+        }
+
+        .btn-primary {
+          background-color: var(--color-accent);
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: bold;
+          font-size: 1rem;
+          transition: background 0.2s, transform 0.1s;
+          text-decoration: none;
+          display: inline-block;
+          text-align: center;
+          width: 100%;
+        }
+
+        .btn-primary:hover {
+          background-color: var(--color-accent-hover);
+        }
+
+        .card-salon {
+          background: var(--bg-card);
+          border-radius: var(--border-radius);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          border: 1px solid #eee;
+          transition: transform 0.2s ease;
+        }
+
+        .card-salon:hover {
+          transform: translateY(-3px);
+        }
+
+        .card-salon img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+        }
+
+        .card-body {
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          justify-content: space-between;
+        }
+
+        .etiqueta {
+          display: inline-block;
+          background: var(--color-accent);
+          color: white;
+          font-weight: bold;
+          font-size: 0.9rem;
+          padding: 0.3rem 0.8rem;
+          margin-bottom: 1rem;
+          border-radius: 4px;
+        }
+
+        .card-body ul {
+          padding-left: 1.2rem;
+          color: var(--text-muted);
+          margin-bottom: 1.5rem;
+        }
+
+        .card-body li {
+          margin-bottom: 0.4rem;
+        }
+
+        .btn-reserva {
+          width: 100%;
+          padding: 0.75rem;
+          border: none;
+          border-radius: 6px;
+          background: var(--color-accent);
+          color: white;
+          font-weight: bold;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+
+        .btn-reserva:hover {
+          background: var(--color-accent-hover);
+        }
+
+        .form-group {
+          margin-bottom: 1.25rem;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .form-group label {
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: var(--text-main);
+        }
+
+        .form-control, select, input {
+          padding: 0.75rem;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 1rem;
+          font-family: var(--font-family);
+          background-color: #fff;
+          width: 100%;
+        }
+
+        .form-control:focus, select:focus, input:focus {
+          outline: none;
+          border-color: var(--color-accent);
+          box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.2);
+        }
+
+        footer {
+          background-color: #2b2521;
+          color: white;
+          padding: 2rem;
+          text-align: center;
+          font-size: 0.9rem;
+          border-top: 1px solid #eee;
+          margin-top: auto;
+        }
+
+        footer h3 {
+          color: #e07a5f;
+          margin-bottom: 10px;
+        }
+
+        footer p {
+          margin-bottom: 0.5rem;
+          color: #d1d1d1;
+        }
+
+        /* ==========================================================================
+           7. RESPONSIVE DESIGN Y MEDIA QUERIES
+           ========================================================================== */
+        @media (max-width: 900px) {
+          .grid-cards {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 600px) {
+          header.navbar {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+          }
+          
+          .nav-links {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+          }
+          
+          .container {
+            padding: 1.5rem 1rem;
+          }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- BARRA DE NAVEGACIÓN (Usa las clases del CSS) -->
+    <!-- BARRA DE NAVEGACIÓN -->
     <header class="navbar">
-        <a href="#" class="nav-brand" onclick="cambiarVista('inicio'); return false;">
+        <a href="#" class="nav-brand" onclick="cambiarVista('inicio'); return false;" style="text-decoration: none;">
             <span>Cerro de la Guardia (Jaén)</span>
         </a>
         <nav>
             <ul class="nav-links">
-                <li><button onclick="cambiarVista('inicio')" id="nav-inicio" class="active"
-                        style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Inicio</button>
-                </li>
-                <li><button onclick="cambiarVista('salas')" id="nav-salas"
-                        style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Salas</button>
-                </li>
-                <li><button onclick="cambiarVista('detalle')" id="nav-detalle"
-                        style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Detalle
-                        Salón</button></li>
-                <li><button onclick="cambiarVista('reservas')" id="nav-reservas"
-                        style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Reservas</button>
-                </li>
-                <li><button onclick="cambiarVista('calendario')" id="nav-calendario"
-                        style="background:none; border:none; cursor:pointer; font:inherit; color:inherit;">Calendario</button>
-                </li>
+                <li><button onclick="cambiarVista('inicio')" id="nav-inicio" class="active">Inicio</button></li>
+                <li><button onclick="cambiarVista('salas')" id="nav-salas">Salas</button></li>
+                <li><button onclick="cambiarVista('detalle')" id="nav-detalle">Detalle Salón</button></li>
+                <li><button onclick="cambiarVista('reservas')" id="nav-reservas">Reservas</button></li>
+                <li><button onclick="cambiarVista('calendario')" id="nav-calendario">Calendario</button></li>
             </ul>
         </nav>
     </header>
@@ -42,120 +362,176 @@
         <section id="vista-inicio" class="view-section active">
             <div class="hero">
                 <h1>Portal de Salones - Cerro de la Guardia</h1>
-                <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma
-                    rápida y sencilla desde un solo lugar.</p>
+                <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
-                <button class="btn-primary" style="display: inline-block; width: auto; margin-right: 1rem;"
-                    onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
-                <button class="btn-primary"
-                    style="display: inline-block; width: auto; background-color: var(--color-deportivo);"
-                    onclick="cambiarVista('reservas')">Hacer una Reserva</button>
+                <button class="btn-primary" style="display: inline-block; width: auto; margin-right: 1rem;" onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
+                <button class="btn-primary" style="display: inline-block; width: auto; background-color: var(--color-deportivo);" onclick="cambiarVista('reservas')">Hacer una Reserva</button>
             </div>
         </section>
 
-        <!-- VISTA 2: SALAS (Usa CSS Grid con .grid-cards y .card) -->
+        <!-- VISTA 2: SALAS -->
         <section id="vista-salas" class="view-section">
             <h2>Salas disponibles</h2>
             <div class="grid-cards">
                 <article class="card-salon">
-
                     <img src="documentos/salon" alt="Salón A">
-
                     <div class="card-body">
-
-                        <span class="etiqueta">SALÓN A</span>
-
-                        <ul>
-                            <li>Precio: 200 € / día</li>
-                            <li>Capacidad: 80 - 100 personas</li>
-                            <li>Mobiliario incluido (mesas y sillas)</li>
-                            <li>Acceso a zonas comunes exteriores</li>
-                            <li>Climatización y aseos</li>
-                            <li>Fianza requerida: 150 € (reembolsable)</li>
-                        </ul>
-
-                        <button class="btn-reserva">RESERVAR</button>
-
+                        <div>
+                            <span class="etiqueta">SALÓN A</span>
+                            <ul>
+                                <li>Precio: 200 € / día</li>
+                                <li>Capacidad: 80 - 100 personas</li>
+                                <li>Mobiliario incluido (mesas y sillas)</li>
+                                <li>Acceso a zonas comunes exteriores</li>
+                                <li>Climatización y aseos</li>
+                                <li>Fianza requerida: 150 € (reembolsable)</li>
+                            </ul>
+                        </div>
+                        <button class="btn-reserva" onclick="cambiarVista('reservas')">RESERVAR</button>
                     </div>
-
                 </article>
 
                 <article class="card-salon">
-
                     <img src="documentos/terraza" alt="Salón B">
-
                     <div class="card-body">
-
-                        <span class="etiqueta">SALÓN B</span>
-
-                        <ul>
-                            <li>Precio:</li>
-                            <li>Capacidad: 80 - 100 personas</li>
-                            <li>Mobiliario incluido (mesas y sillas)</li>
-                            <li>Acceso a zonas comunes exteriores</li>
-                            <li>Climatización y aseos</li>
-                            <li>Fianza requerida: 150 € (reembolsable)</li>
-                        </ul>
-
-                        <button class="btn-reserva">RESERVAR</button>
-
+                        <div>
+                            <span class="etiqueta">SALÓN B</span>
+                            <ul>
+                                <li>Precio: 200 € / día</li>
+                                <li>Capacidad: 80 - 100 personas</li>
+                                <li>Mobiliario incluido (mesas y sillas)</li>
+                                <li>Acceso a zonas comunes exteriores</li>
+                                <li>Climatización y aseos</li>
+                                <li>Fianza requerida: 150 € (reembolsable)</li>
+                            </ul>
+                        </div>
+                        <button class="btn-reserva" onclick="cambiarVista('reservas')">RESERVAR</button>
                     </div>
-
                 </article>
 
                 <article class="card-salon">
-
                     <img src="documentos/puerta" alt="Salones A y B">
-
                     <div class="card-body">
-
-                        <span class="etiqueta">SALONES A Y B</span>
-
-                        <ul>
-                            <li>Precio: 350 € / día</li>
-                            <li>Uso exclusivo de ambos salones</li>
-                            <li>Mayor espacio y flexibilidad para grandes eventos</li>
-                            <li>Acceso total a las zonas exteriores</li>
-                            <li>Ideal para eventos más grandes</li>
-                            <li>Fianza requerida: 250 € (reembolsable)</li>
-                        </ul>
-
-                        <button class="btn-reserva">RESERVAR</button>
-
+                        <div>
+                            <span class="etiqueta">SALONES A Y B</span>
+                            <ul>
+                                <li>Precio: 350 € / día</li>
+                                <li>Uso exclusivo de ambos salones</li>
+                                <li>Mayor espacio y flexibilidad para grandes eventos</li>
+                                <li>Acceso total a las zonas exteriores</li>
+                                <li>Ideal para eventos más grandes</li>
+                                <li>Fianza requerida: 250 € (reembolsable)</li>
+                            </ul>
+                        </div>
+                        <button class="btn-reserva" onclick="cambiarVista('reservas')">RESERVAR</button>
                     </div>
-
                 </article>
             </div>
         </section>
-        </main>
 
-        <footer style="background-color: #2b2521; color: white; padding: 20px; text-align: center;">
-            <h3>LA GUARDIA DE JAÉN</h3>
-            <p><strong>Dirección:</strong> Las allanadas, La guardia de jaén, Jaén (C.P. 23170)</p>
-            <p><strong>Contacto:</strong> Teléfono: (55) 1234 5678 | Email: hola@sitioincreible.com</p>
-            <p><strong>Horarios:</strong> Lunes a Viernes de 8:00 a 17:00</p>
-        </footer>
-        <!-- Script de control de pestañas -->
-        <script>
-            function cambiarVista(vistaId) {
-                // Ocultar todas las secciones
-                const secciones = document.querySelectorAll('.view-section');
-                secciones.forEach(sec => sec.classList.remove('active'));
+        <!-- VISTA 3: DETALLE SALÓN -->
+        <section id="vista-detalle" class="view-section">
+            <p style="margin-bottom: 1rem;"><a href="#" onclick="cambiarVista('salas'); return false;" style="color: var(--color-accent); text-decoration: none; font-weight: bold;">&larr; Volver al listado de espacios</a></p>
+            
+            <div class="card">
+                <header style="margin-bottom: 1rem;">
+                    <h1 style="color: var(--color-accent); font-size: 1.8rem;">Salón del Trono</h1>
+                </header>
 
-                // Quitar clase active a todos los botones del nav
-                const botones = document.querySelectorAll('.nav-links button');
-                botones.forEach(btn => btn.classList.remove('active'));
+                <section style="margin-top: 1rem;">
+                    <h3>Información General</h3>
+                    <p><strong>Aforo máximo:</strong> 150 personas</p>
+                    <p><strong>Descripción:</strong> Espacio histórico amplio diseñado para recepciones solemnes, visitas guiadas privadas y eventos institucionales.</p>
+                </section>
 
-                // Mostrar la sección seleccionada y activar su botón correspondiente
-                document.getElementById('vista-' + vistaId).classList.add('active');
-                const btnTarget = document.getElementById('nav-' + vistaId);
-                if (btnTarget) btnTarget.classList.add('active');
+                <section style="margin-top: 1rem;">
+                    <h3>Características</h3>
+                    <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                        <li>Climatización e iluminación adaptada.</li>
+                        <li>Acceso para personas con movilidad reducida.</li>
+                    </ul>
+                </section>
+            </div>
+        </section>
 
-                // Subir arriba de la página suavemente
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        </script>
+        <!-- VISTA 4: RESERVAS -->
+        <section id="vista-reservas" class="view-section">
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--color-accent); margin-bottom: 1.5rem; text-align: center;">Hacer una Reserva</h2>
+                <form onsubmit="event.preventDefault(); alert('¡Reserva registrada con éxito!');">
+                    <div class="form-group">
+                        <label for="salon-reserva">Selecciona el Salón:</label>
+                        <select id="salon-reserva" class="form-control" required>
+                            <option value="">-- Seleccionar Salón --</option>
+                            <option value="Salon Principal">Salón Principal</option>
+                            <option value="Salon Mirador">Salon Mirador</option>
+                            <option value="Salon de Eventos">Salon de Eventos</option>
+                            <option value="Salon del Trono">Salón del Trono</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Tu nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha de Reserva:</label>
+                        <input type="date" id="fecha" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora">Hora:</label>
+                        <input type="time" id="hora" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 1rem;">Confirmar Reserva</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- VISTA 5: CALENDARIO -->
+        <section id="vista-calendario" class="view-section">
+            <div class="card" style="text-align: center;">
+                <h2>Calendario de Disponibilidad</h2>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Consulta aquí el calendario general de eventos para planificar tu reserva con antelación.</p>
+                <div style="margin: 30px 0; padding: 40px; background: #f4f6f9; border-radius: 8px; color: var(--text-muted);">
+                    [ Visualizador de Calendario Interactivo / Mes Actual ]
+                </div>
+                <p><a href="#" onclick="cambiarVista('reservas'); return false;" style="color: var(--color-accent); font-weight: bold; text-decoration: underline;">Ir al formulario de reservas &rarr;</a></p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <h3>LA GUARDIA DE JAÉN</h3>
+        <p><strong>Dirección:</strong> Las allanadas, La guardia de jaén, Jaén (C.P. 23170)</p>
+        <p><strong>Contacto:</strong> Teléfono: (55) 1234 5678 | Email: hola@sitioincreible.com</p>
+        <p><strong>Horarios:</strong> Lunes a Viernes de 8:00 a 17:00</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #aaa;">&copy; 2026 Sistema de Gestión de Reservas - Cerro de la Guardia.</p>
+    </footer>
+
+    <!-- Script de control de pestañas -->
+    <script>
+        function cambiarVista(vistaId) {
+            // Ocultar todas las secciones
+            const secciones = document.querySelectorAll('.view-section');
+            secciones.forEach(sec => sec.classList.remove('active'));
+
+            // Quitar clase active a todos los botones del nav
+            const botones = document.querySelectorAll('.nav-links button');
+            botones.forEach(btn => btn.classList.remove('active'));
+
+            // Mostrar la sección seleccionada y activar su botón correspondiente
+            document.getElementById('vista-' + vistaId).classList.add('active');
+            const btnTarget = document.getElementById('nav-' + vistaId);
+            if(btnTarget) btnTarget.classList.add('active');
+
+            // Subir arriba de la página suavemente
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 
