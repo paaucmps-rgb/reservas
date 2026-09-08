@@ -112,10 +112,83 @@
 </article>
             </div>
         </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2026 Sistema de Gestión de Reservas.</p>
+        <!-- VISTA 3: DETALLE SALÓN -->
+        <section id="vista-detalle" class="view-section">
+            <p style="margin-bottom: 1rem;"><a href="#" onclick="cambiarVista('salas'); return false;" style="color: var(--color-accent); text-decoration: none; font-weight: bold;">&larr; Volver al listado de espacios</a></p>
+            
+            <div class="card">
+                <header>
+                    <h1 style="color: var(--color-accent);">Salón del Trono</h1>
+                </header>
+
+                <section style="margin-top: 1rem;">
+                    <h3>Información General</h3>
+                    <p><strong>Aforo máximo:</strong> 150 personas</p>
+                    <p><strong>Descripción:</strong> Espacio histórico amplio diseñado para recepciones solemnes, visitas guiadas privadas y eventos institucionales.</p>
+                </section>
+
+                <section style="margin-top: 1rem;">
+                    <h3>Características</h3>
+                    <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                        <li>Climatización e iluminación adaptada.</li>
+                        <li>Acceso para personas con movilidad reducida.</li>
+                    </ul>
+                </section>
+            </div>
+        </section>
+
+        <!-- VISTA 4: RESERVAS (Usa las clases .form-group y .form-control del CSS) -->
+        <section id="vista-reservas" class="view-section">
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: var(--color-accent); margin-bottom: 1.5rem; text-align: center;">Hacer una Reserva</h2>
+                <form onsubmit="event.preventDefault(); alert('¡Reserva registrada con éxito!');">
+                    <div class="form-group">
+                        <label for="salon-reserva">Selecciona el Salón:</label>
+                        <select id="salon-reserva" class="form-control" required>
+                            <option value="">-- Seleccionar Salón --</option>
+                            <option value="Salon Principal">Salón Principal</option>
+                            <option value="Salon Mirador">Salon Mirador</option>
+                            <option value="Salon de Eventos">Salon de Eventos</option>
+                            <option value="Salon del Trono">Salón del Trono</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" class="form-control" placeholder="Tu nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha de Reserva:</label>
+                        <input type="date" id="fecha" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora">Hora:</label>
+                        <input type="time" id="hora" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="margin-top: 1rem;">Confirmar Reserva</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- VISTA 5: CALENDARIO -->
+        <section id="vista-calendario" class="view-section">
+            <div class="card" style="text-align: center;">
+                <h2>Calendario de Disponibilidad</h2>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Consulta aquí el calendario general de eventos para planificar tu reserva con antelación.</p>
+                <div style="margin: 30px 0; padding: 40px; background: #f4f6f9; border-radius: 8px; color: var(--text-muted);">
+                    [ Visualizador de Calendario Interactivo / Mes Actual ]
+                </div>
+                <p><a href="#" onclick="cambiarVista('reservas'); return false;" style="color: var(--color-accent); font-weight: bold; text-decoration: underline;">Ir al formulario de reservas &rarr;</a></p>
+            </div>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; 2026 Sistema de Gestión de Reservas - Cerro de la Guardia.</p>
     </footer>
 
     <!-- Script de control de pestañas -->
