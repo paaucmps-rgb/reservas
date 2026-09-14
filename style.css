@@ -359,3 +359,62 @@ footer {
     }
 
 }
+/* Estilos del Footer */
+.site-footer {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    padding: 40px 20px;
+    margin-top: 40px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-col h3, .footer-col h4 {
+    color: var(--color-salas, #d97736);
+    margin-bottom: 15px;
+}
+
+.footer-col p {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: #cccccc;
+}
+
+/* Responsive Design / Media Queries para los 3 puntos de corte */
+
+/* 1. Móvil (Pantallas pequeñas hasta 576px) */
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    .nav-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .footer-container {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        text-align: center;
+    }
+}
+
+/* 2. Tablet (Pantallas entre 577px y 992px) */
+@media (min-width: 577px) and (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablet */
+    }
+}
+
+/* 3. Escritorio (A partir de 993px) - Diseño por defecto ya aplicado */
+
