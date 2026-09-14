@@ -156,7 +156,52 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         </script>
+<!-- Sección de Formulario de Reservas -->
+<section id="vista-reservas" class="view-section">
+  <div class="reserva-card">
+    <h2>Reserva — Salas del Cerro</h2>
 
+    <form id="formReserva" onsubmit="comprobarDisponibilidad(event)">
+      <!-- Selector de Recurso -->
+      <div class="form-group">
+        <label for="recurso">Sala</label>
+        <select id="recurso" required>
+          <option value="">Selecciona una sala</option>
+          <option value="sala_1">Sala 1</option>
+          <option value="sala_2">Sala 2</option>
+        </select>
+      </div>
+
+      <!-- Selector de Fecha -->
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" required>
+      </div>
+
+      <!-- Selector de Franja Horaria -->
+      <div class="form-group">
+        <label for="franja">Turno</label>
+        <select id="franja" required>
+          <option value="">Selecciona turno</option>
+          <option value="manana">Mañana</option>
+          <option value="tarde">Tarde</option>
+        </select>
+      </div>
+
+      <!-- Botón Comprobar -->
+      <button type="submit" class="btn-secundario">Comprobar Disponibilidad</button>
+    </form>
+
+    <!-- Botón Realizar Reserva -->
+    <button id="btnReservar" onclick="realizarReserva()" disabled class="btn-primario">
+      Realizar Reserva
+    </button>
+
+    <!-- Mensajes de Respuesta -->
+    <div id="mensajeFeedback" class="mensaje hidden"></div>
+  </div>
+</section>
 </body>
-
+<!-- Sección del menú principal de navegación -->
+<nav>...</nav>
 </html>
