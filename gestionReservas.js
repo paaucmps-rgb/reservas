@@ -1,3 +1,4 @@
+// Creado por Alejandra Carmona
 // 1. Clave única para guardar nuestras reservas en el navegador
 const CLAVE_LOCALSTORAGE = "reservas_salas";
 // 2. Comprobar que nuestro JS responde cuando se carga la página
