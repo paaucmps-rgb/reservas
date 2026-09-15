@@ -1,7 +1,9 @@
 /* ================================================================= =========
    1. IDENTIDAD VISUAL Y VARIABLES CSS (Unificadas) unificados por blas
    ========================================================================== */
-:root {
+ 
+ /* Variables de color y tipografía creado por Paula*/
+   :root {
   /* Cambio por Carmen */
   --bg-primary: #fdfaf6;
   --bg-card: #ffffff;
