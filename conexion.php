@@ -2,8 +2,8 @@
 // Datos de configuración para XAMPP
 $servidor = "localhost";
 $usuario = "root";
-$password = ""; 
-$base_datos = "reservas_cerro"; // Nombre exacto de la BD de Alejandra[cite: 2]
+$password = "";
+$base_datos = "reservas_cerro"; // Nombre exacto de la BD
 
 // Conexión mediante MySQLi
 $conexion = new mysqli($servidor, $usuario, $password, $base_datos);

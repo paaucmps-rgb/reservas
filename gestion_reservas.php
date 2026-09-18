@@ -1,5 +1,4 @@
-// Creado por Alejandra Carmona
-
+<?php ?>
 document.addEventListener("DOMContentLoaded", function () {
   console.log("¡El archivo gestionReservas.js se ha cargado correctamente!");
   mostrarReservasGuardadas();
