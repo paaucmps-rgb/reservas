@@ -805,10 +805,63 @@
 async function submitReservation(e) {
     e.preventDefault();
 
-    await enviarUsuario();
+    const nombre = document.getElementById("nombre").value.trim();
+    const apellidos = document.getElementById("apellidos").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-    closeModal();
-    showToast("¡Solicitud enviada con éxito! Nos contactaremos a la brevedad.");
+    const fecha = document.getElementById("bookingDate").value;
+    const franja = document.getElementById("franja").value;
+
+    const id_recurso = currentActiveSalon.id;
+
+    try {
+
+        const respuesta = await fetch("guardar_reserva.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                apellidos: apellidos,
+                email: email,
+                fecha: fecha,
+                franja: franja,
+                id_recurso: id_recurso
+            })
+        });
+
+        const resultado = await respuesta.json();
+
+        // B5: el hueco ya está ocupado
+        if (respuesta.status === 409) {
+            showToast(resultado.error, "error");
+            return;
+        }
+
+        if (!respuesta.ok || !resultado.ok) {
+            showToast(
+                resultado.error || "Error al guardar la reserva",
+                "error"
+            );
+            return;
+        }
+
+        closeModal();
+
+        showToast(
+            "¡Solicitud enviada con éxito! Nos contactaremos a la brevedad."
+        );
+
+    } catch (error) {
+
+        console.error("Error al conectar con el servidor:", error);
+
+        showToast(
+            "Error al conectar con el servidor.",
+            "error"
+        );
+    }
 }
 
         // TOAST NOTIFICATION HELPERS
