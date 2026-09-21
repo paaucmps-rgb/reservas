@@ -1,24 +1,25 @@
-/* ================================================================= =========
+/* ==========================================================================
    1. IDENTIDAD VISUAL Y VARIABLES CSS (Unificadas) unificados por blas
    ========================================================================== */
- 
- /* Variables de color y tipografía creado por Paula*/
-   :root {
+   
+   /* Variables de color y tipografía creado por Paula*/
+    :root {
   /* Cambio por Carmen */
-  --bg-primary: #fdfaf6;
+  --bg-primary: #fcf9f5;
   --bg-card: #ffffff;
-  --text-main: #2d2d2d;
+  --text-main: #333333;
   --text-muted: #666666;
 
   /* Variables de color de acento */
   --color-deportivo: #2b6cb0;
   --color-castillo: #8c2d19;
-  --color-salas: #e67e22; /* Naranja Cerro */
+  --color-salas: #d97736; /* Color naranja/tierra de vuestro Canva */
 
   --color-accent: var(--color-salas);
   --color-accent-hover: #d35400;
   --border-radius: 12px;
   --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-principal: var(--font-family);
 
   /* Variables adicionales de soporte */
   --color-blanco: #ffffff;
@@ -30,7 +31,7 @@
 /* ==========================================================================
    2. REINICIO Y BOX MODEL
    ========================================================================== */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -96,7 +97,6 @@ header h1,
 }
 
 nav {
-  /* background-color: #2c3e50; modificado por blas no se ve bien */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -107,7 +107,17 @@ nav {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links a.active {
+  color: var(--color-salas);
 }
 
 nav button {
@@ -145,29 +155,43 @@ main,
   flex-grow: 1;
 }
 
-.hero {
+.hero,
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url('img/fondo-cerro.jpg') no-repeat center center/cover;
   text-align: center;
   padding: 3rem 1.5rem;
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
   color: white;
   border-radius: var(--border-radius);
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.hero h1,
-.hero h2 {
-  font-size: 2.2rem;
-  margin-bottom: 0.75rem;
+.hero-section {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+.hero-content {
+  margin: auto;
+}
+
+.hero-content h1,
+.hero h1,
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p,
 .hero p {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   max-width: 700px;
   margin: 0 auto;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* Grilla principal para tarjetas de salas */
