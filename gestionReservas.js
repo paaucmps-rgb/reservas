@@ -1,6 +1,9 @@
 // Creado por Alejandra Carmona
 
-document.addEventListener("DOMContentLoaded", function () {
+const CLAVE_LOCALSTORAGE = "reservas_salas";
+
+// Comprobar que el JS se carga correctamente
+document.addEventListener("DOMContentLoaded", function() {
   console.log("¡El archivo gestionReservas.js se ha cargado correctamente!");
   mostrarReservasGuardadas();
 });
