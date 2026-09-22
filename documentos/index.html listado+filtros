@@ -349,6 +349,7 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<<<<<<< HEAD
                             <div>
                                 <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">Tu Nombre</label>
                                 <input type="text" required placeholder="Juan Pérez" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500">
@@ -358,6 +359,44 @@
                                 <input type="email" required placeholder="correo@ejemplo.com" class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                             </div>
                         </div>
+=======
+    <div>
+        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">
+            Tu Nombre
+        </label>
+        <input 
+            type="text" 
+            id="nombre"
+            required 
+            placeholder="Juan" 
+            class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+    </div>
+
+    <div>
+        <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">
+            Apellidos
+        </label>
+        <input 
+            type="text" 
+            id="apellidos"
+            required 
+            placeholder="Pérez García" 
+            class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+    </div>
+</div>
+
+<div>
+    <label class="block text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">
+        Correo Electrónico
+    </label>
+    <input 
+        type="email" 
+        id="email"
+        required 
+        placeholder="correo@ejemplo.com" 
+        class="w-full px-3 py-2 text-sm rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+</div>
+>>>>>>> 77693a16fb742ba35c3b7dcbdb1937cc04c07104
 
                         <!-- Resumen Presupuesto -->
                         <div class="bg-emerald-50 dark:bg-emerald-950/40 p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/50 flex justify-between items-center">
@@ -775,12 +814,77 @@
             document.getElementById('calculatedTotal').textContent = `$${total}`;
         }
 
+<<<<<<< HEAD
         function submitReservation(e) {
             e.preventDefault();
             closeModal();
             showToast("¡Solicitud enviada con éxito! Nos contactaremos a la brevedad.");
         }
 
+=======
+async function submitReservation(e) {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const apellidos = document.getElementById("apellidos").value.trim();
+    const email = document.getElementById("email").value.trim();
+
+    const fecha = document.getElementById("bookingDate").value;
+    const franja = document.getElementById("franja").value;
+
+    const id_recurso = currentActiveSalon.id;
+
+    try {
+
+        const respuesta = await fetch("guardar_reserva.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                apellidos: apellidos,
+                email: email,
+                fecha: fecha,
+                franja: franja,
+                id_recurso: id_recurso
+            })
+        });
+
+        const resultado = await respuesta.json();
+
+        // B5: el hueco ya está ocupado
+        if (respuesta.status === 409) {
+            showToast(resultado.error, "error");
+            return;
+        }
+
+        if (!respuesta.ok || !resultado.ok) {
+            showToast(
+                resultado.error || "Error al guardar la reserva",
+                "error"
+            );
+            return;
+        }
+
+        closeModal();
+
+        showToast(
+            "¡Solicitud enviada con éxito! Nos contactaremos a la brevedad."
+        );
+
+    } catch (error) {
+
+        console.error("Error al conectar con el servidor:", error);
+
+        showToast(
+            "Error al conectar con el servidor.",
+            "error"
+        );
+    }
+}
+
+>>>>>>> 77693a16fb742ba35c3b7dcbdb1937cc04c07104
         // TOAST NOTIFICATION HELPERS
         function showToast(msg, type = 'success') {
             const toast = document.getElementById('toast');
