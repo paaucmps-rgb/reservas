@@ -71,21 +71,6 @@ if ($stmt->execute()) {
         throw new Exception("Error al ejecutar la consulta de inserción.");
     }
 
-    $stmt->close();
-    $conexion->close();
-//Cambios hechos por Paula
-// 4. Insertar la reserva en la base de datos
-    // Cambios hechos por Paula
-    $estado = "Confirmada";
-    $stmt = $conexion->prepare("INSERT INTO reservas (id_usuario, id_recurso, fecha, franja, estado) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("iisss", $idUsuario, $idRecurso, $fecha, $franja, $estado);
-
-    if ($stmt->execute()) {
-        http_response_code(200);
-        echo json_encode(['exito' => true, 'mensaje' => 'Reserva guardada con éxito.']);
-    } else {
-        throw new Exception("Error al ejecutar la consulta de inserción.");
-    }
 
     // Cerrar declaraciones y conexión DENTRO del try
     $stmt->close();
