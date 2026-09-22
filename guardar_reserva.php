@@ -12,23 +12,23 @@ const SALONES = [
     'Salón B'     => ['Salón B', 'Salón A y B'],
     'Salón A y B' => ['Salón A', 'Salón B', 'Salón A y B'],
 ];
-// Leer los datos enviados desde JavaScript (vienen en formato JSON)
-
-//cambios hechos por paula 
+//Cambios hechos por Paula
+// 1. Leer los datos enviados desde JavaScript en formato JSON
 $datos = json_decode(file_get_contents('php://input'), true);
-if (!isset(SALONES[$salon])) {
-    echo json_encode(['exito' => false, 'mensaje' => 'El salón seleccionado no es válido.']);
-    exit;
-}
-$nombre = trim($datos['nombre'] ?? '');
-$salon  = trim($datos['salon'] ?? '');
-$fecha  = trim($datos['fecha'] ?? '');
-$franja = trim($datos['franja'] ?? '');
 
+// 2. Extraer y limpiar cada variable con trim() PRIMERO
+$nombre  = trim($datos['nombre'] ?? '');
+$salon   = trim($datos['salon'] ?? '');
+$fecha   = trim($datos['fecha'] ?? '');
+$franja  = trim($datos['franja'] ?? '');
+$email   = trim($datos['email'] ?? '');
+
+// 3. AHORA SÍ: Validar que los campos obligatorios no estén vacíos
 if ($nombre === '' || $salon === '' || $fecha === '' || $franja === '') {
-    echo json_encode(['exito' => false, 'mensaje' => 'Faltan datos obligatorios.']);
+    http_response_code(400);
+    echo json_encode(['exito' => false, 'mensaje' => 'Todos los campos son obligatorios.']);
     exit;
-}
+
 
 // 1. Buscar el usuario por nombre; si no existe, se crea
 $stmt = $conexion->prepare("SELECT id_usuario FROM usuarios WHERE nombre = ?");
@@ -71,11 +71,13 @@ if ($stmt->execute()) {
         throw new Exception("Error al ejecutar la consulta de inserción.");
     }
 
+
+    // Cerrar declaraciones y conexión DENTRO del try
     $stmt->close();
     $conexion->close();
 
 } catch (Throwable $e) {
-    // Cambio hecho por paula - Manejo de errores en JSON
+    // Manejo global de errores B7 - Cambios hechos por Paula
     error_log('Error en guardar_reserva.php: ' . $e->getMessage());
 
     $mensaje = 'No se pudo guardar la reserva por un error del servidor.';
