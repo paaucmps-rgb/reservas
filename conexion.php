@@ -11,6 +11,13 @@ $conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 if ($conexion->connect_error) {
     die("Error de conexión a la base de datos: " . $conexion->connect_error);
 }
-
-$conexion->set_charset("utf8");
+<!-- Cambio hecho por Enri -->
+<?php
+// Cambios realizados por Enri
+// Datos de configuración para XAMPP
+$servidor = "localhost";
+$usuario = "root";
+$password = "";
+$base_datos = "reservas_cerro"; // Nombre exacto de la BD
+$conexion->set_charset("utf8mb4");
 ?>
