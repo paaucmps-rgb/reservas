@@ -12,5 +12,12 @@ if ($conexion->connect_error) {
     die("Error de conexión a la base de datos: " . $conexion->connect_error);
 }
 <!-- Cambio hecho por Enri -->
+<?php
+// Cambios realizados por Enri
+// Datos de configuración para XAMPP
+$servidor = "localhost";
+$usuario = "root";
+$password = "";
+$base_datos = "reservas_cerro"; // Nombre exacto de la BD
 $conexion->set_charset("utf8mb4");
 ?>
