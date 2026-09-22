@@ -129,6 +129,7 @@
 
         <!-- VISTA 4: RESERVAS -->
         <section id="vista-reservas" class="view-section">
+            <div id="lista-reservas"></div>
             <div class="card" style="max-width: 600px; margin: 0 auto;">
                 <h2 style="color: var(--color-accent); margin-bottom: 1.5rem; text-align: center;">Hacer una Reserva</h2>
                 <form id="form-reserva" onsubmit="return manejarEnvioReserva(event);">
@@ -209,7 +210,7 @@
     </script>
 
     <!-- Contenedor donde tu JS pintará las reservas automáticamente -->
-    <div id="lista-reservas"></div>
+    
 
     <!-- ÚNICA referencia al script de reservas, al final del body -->
     <script src="gestionReservas.js"></script>
