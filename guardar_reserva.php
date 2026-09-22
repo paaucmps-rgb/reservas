@@ -1,4 +1,9 @@
 <?php
+// Cambio hecho por Paula
+ini_set('display_errors', 0);
+define('MODO_DEBUG', true);
+
+try {
 //cambios hechos por paula 
 header('Content-Type: application/json; charset=utf-8');
 require_once 'conexion.php';
@@ -58,18 +63,31 @@ if ($fila = $resultado->fetch_assoc()) {
     exit;
 }
 $stmt->close();
-
-// 3. Insertar la reserva
-$estado = "Confirmada";
-$stmt = $conexion->prepare("INSERT INTO reservas (id_usuario, id_recurso, fecha, franja, estado) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("iisss", $idUsuario, $idRecurso, $fecha, $franja, $estado);
-
+//Cambios hechos por Paula 
 if ($stmt->execute()) {
-    echo json_encode(['exito' => true, 'mensaje' => 'Reserva guardada correctamente.']);
-} else {
-    echo json_encode(['exito' => false, 'mensaje' => 'Error al guardar: ' . $conexion->error]);
-}
+        http_response_code(200);
+        echo json_encode(['exito' => true, 'mensaje' => 'Reserva guardada con éxito']);
+    } else {
+        throw new Exception("Error al ejecutar la consulta de inserción.");
+    }
 
-$stmt->close();
-$conexion->close();
-?>
+    $stmt->close();
+    $conexion->close();
+
+} catch (Throwable $e) {
+    // Cambio hecho por paula - Manejo de errores en JSON
+    error_log('Error en guardar_reserva.php: ' . $e->getMessage());
+
+    $mensaje = 'No se pudo guardar la reserva por un error del servidor.';
+    if (defined('MODO_DEBUG') && MODO_DEBUG) {
+        $mensaje .= ' Detalle: ' . $e->getMessage();
+    }
+
+    http_response_code(500);
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode([
+        'exito' => false,
+        'mensaje' => $mensaje
+    ]);
+    exit;
+}
