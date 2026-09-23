@@ -34,7 +34,6 @@
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
 }
 
 body {
@@ -45,6 +44,25 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Estilos propios para la tarjeta de salón */
+.card-salon {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.card-salon__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-salon__contenido {
+  padding: 16px;
 }
 
 /* ==========================================================================
@@ -209,7 +227,7 @@ article,
 .card {
   background: var(--bg-card);
   border-radius: var(--border-radius);
-  padding: 1.8rem;
+
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
