@@ -158,7 +158,7 @@ main,
 .hero,
 .hero-section {
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('img/fondo-cerro.jpg') no-repeat center center/cover;
+    url('../documentos/imagenes/terraza.jpeg') no-repeat center center/cover;
   text-align: center;
   padding: 3rem 1.5rem;
   color: white;
