@@ -242,11 +242,13 @@ body {
         font-size: 2rem;
     }
 }
+
 .navbar .nav-links li button {
     color: black !important;
     background: yellow !important;
     border: 5px solid blue !important;
 }
+
 .navbar .nav-links button {
     color: #22282e !important;
     background: #ffffff !important;
@@ -270,3 +272,32 @@ body {
     text-decoration-thickness: 2px !important;
     text-underline-offset: 4px !important;
 }
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 1000;
+}
+
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+}
+
+:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
