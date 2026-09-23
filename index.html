@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reserva los salones del Cerro de las Allanadas, en La Guardia de Jaén: Salón A, Salón B o los dos juntos.">
+    <meta name="theme-color" content="#224b7c">
+    <title>Salones Cerro de las Allanadas - La Guardia de Jaén</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23224b7c'/%3E%3Cpath d='M4 26C9 11 23 11 28 26Z' fill='white'/%3E%3C/svg%3E">
+    <link rel="preload" href="style/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="style/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header class="navbar">
+        <div class="navbar__interior">
+            <a href="#" class="nav-brand" onclick="cambiarVista('inicio'); return false;">
+                <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                    <rect width="32" height="32" rx="7" fill="#224b7c"></rect>
+                    <path d="M4 26C9 11 23 11 28 26Z" fill="#fff"></path>
+                </svg>
+                <span class="nav-brand__texto">
+                    <span class="nav-brand__nombre">Cerro de la Guardia</span>
+                    <span class="nav-brand__lugar">Salones de La Guardia de Jaén</span>
+                </span>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">Menú</button>
+
+            <nav class="nav-menu" id="menu-principal" aria-label="Principal">
+                <ul class="nav-links">
+                    <li><button type="button" onclick="cambiarVista('inicio')" id="nav-inicio" class="active" aria-current="page">Inicio</button></li>
+                    <li><button type="button" onclick="cambiarVista('salas')" id="nav-salas">Salas</button></li>
+                    <li><button type="button" onclick="cambiarVista('detalle')" id="nav-detalle">Detalle Salón</button></li>
+                    <li><button type="button" onclick="cambiarVista('reservas')" id="nav-reservas">Reservas</button></li>
+                    <li><button type="button" onclick="cambiarVista('calendario')" id="nav-calendario">Calendario</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="contenido" tabindex="-1">
+
+        <!-- VISTA 1: INICIO -->
+        <section id="vista-inicio" class="view-section active">
+            <div class="hero">
+                <img class="hero__foto" src="documentos/imagenes/terraza.jpeg" alt="Terraza con pérgola blanca y muro de piedra en lo alto del cerro">
+                <div class="hero__contenido">
+                    <h1>Reserva tu salón en el Cerro de la Guardia</h1>
+                    <p>Dos salones para 80 - 100 personas cada uno, o los dos juntos, con zonas exteriores. Elige salón, día y franja y tu reserva queda registrada al momento.</p>
+                    <div class="hero__acciones">
+                        <button type="button" class="boton boton--primario" onclick="cambiarVista('reservas')">Hacer una reserva</button>
+                        <button type="button" class="boton boton--secundario" onclick="cambiarVista('salas')">Ver los salones</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor vista pasos">
+                <h2>Cómo reservar</h2>
+                <ol class="pasos__lista">
+                    <li>
+                        <h3>Elige tu salón</h3>
+                        <p>Salón A, Salón B o los dos juntos si necesitas más espacio.</p>
+                    </li>
+                    <li>
+                        <h3>Indica día y franja</h3>
+                        <p>Escoge la fecha y si lo quieres por la mañana o por la tarde.</p>
+                    </li>
+                    <li>
+                        <h3>Déjanos tus datos</h3>
+                        <p>Con tu nombre y tu correo, la reserva queda confirmada al enviar el formulario.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- VISTA 2: SALAS -->
+        <section id="vista-salas" class="view-section">
+            <div class="contenedor vista">
+                <div class="vista-cabecera">
+                    <h1>Salas disponibles</h1>
+                    <p>Elige uno de los dos salones o reserva los dos juntos.</p>
+                </div>
+
+                <div class="salones">
+                    <article class="salon">
+<!-- Creado por Alejandra Carmona -->
+<!-- Se trata de la subida de imágenes, en este caso del salón -->
+                        <img class="salon__foto" src="documentos/imagenes/salon.jpeg" alt="Fachada encalada del Salón A, con puerta de hierro y pérgola blanca" loading="lazy">
+                        <div class="salon__cuerpo">
+                            <h2>Salón A</h2>
+                            <p class="salon__precio"><strong>200 €</strong> / día</p>
+                            <dl class="salon__datos">
+                                <div><dt>Capacidad</dt><dd>80 - 100 personas</dd></div>
+                                <div><dt>Fianza</dt><dd>150 € (reembolsable)</dd></div>
+                            </dl>
+                            <ul class="salon__incluye">
+                                <li>Mobiliario incluido (mesas y sillas)</li>
+                                <li>Acceso a zonas comunes exteriores</li>
+                                <li>Climatización y aseos</li>
+                            </ul>
+                            <button type="button" class="boton boton--primario" onclick="cambiarVista('reservas', 'Salón A')">Reservar el Salón A</button>
+                        </div>
+                    </article>
+
+                    <article class="salon">
+<!-- Creado por Alejandra Carmona -->
+                        <img class="salon__foto salon__foto--puerta" src="documentos/imagenes/puerta.jpeg" alt="Puerta de hierro del Salón B, con marco de piedra sobre pared encalada" loading="lazy">
+                        <div class="salon__cuerpo">
+                            <h2>Salón B</h2>
+                            <p class="salon__precio"><strong>200 €</strong> / día</p>
+                            <dl class="salon__datos">
+                                <div><dt>Capacidad</dt><dd>80 - 100 personas</dd></div>
+                                <div><dt>Fianza</dt><dd>150 € (reembolsable)</dd></div>
+                            </dl>
+                            <ul class="salon__incluye">
+                                <li>Mobiliario incluido (mesas y sillas)</li>
+                                <li>Acceso a zonas comunes exteriores</li>
+                                <li>Climatización y aseos</li>
+                            </ul>
+                            <button type="button" class="boton boton--primario" onclick="cambiarVista('reservas', 'Salón B')">Reservar el Salón B</button>
+                        </div>
+                    </article>
+
+                    <article class="salon salon--doble">
+<!-- Creado por Alejandra Carmona -->
+                        <div class="salon__fotos">
+                            <img class="salon__foto" src="documentos/imagenes/salon.jpeg" alt="Fachada del Salón A" loading="lazy">
+                            <img class="salon__foto salon__foto--puerta" src="documentos/imagenes/puerta.jpeg" alt="Puerta del Salón B" loading="lazy">
+                        </div>
+                        <div class="salon__cuerpo">
+                            <h2>Salones A y B</h2>
+                            <p class="salon__precio"><strong>350 €</strong> / día</p>
+                            <dl class="salon__datos">
+                                <div><dt>Fianza</dt><dd>250 € (reembolsable)</dd></div>
+                            </dl>
+                            <ul class="salon__incluye">
+                                <li>Uso exclusivo de ambos salones</li>
+                                <li>Mayor espacio y flexibilidad para grandes eventos</li>
+                                <li>Acceso total a las zonas exteriores</li>
+                                <li>Ideal para eventos más grandes</li>
+                            </ul>
+                            <button type="button" class="boton boton--primario" onclick="cambiarVista('reservas', 'Salón A y B')">Reservar los Salones A y B</button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA 3: DETALLE SALÓN -->
+        <section id="vista-detalle" class="view-section">
+            <div class="contenedor vista">
+                <a href="#" class="volver" onclick="cambiarVista('salas'); return false;">&larr; Volver al listado de espacios</a>
+
+                <div class="vista-cabecera">
+                    <h1>Detalle del Salón</h1>
+                </div>
+
+                <div class="detalle">
+                    <section class="detalle__bloque">
+                        <h2>Información General</h2>
+                        <p><strong>Aforo máximo:</strong> 150 personas</p>
+                        <p><strong>Descripción:</strong> Espacio histórico amplio diseñado para recepciones solemnes, visitas guiadas privadas y eventos institucionales.</p>
+                    </section>
+
+                    <section class="detalle__bloque">
+                        <h2>Características</h2>
+                        <ul>
+                            <li>Climatización e iluminación adaptada.</li>
+                            <li>Acceso para personas con movilidad reducida.</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA 4: RESERVAS -->
+        <section id="vista-reservas" class="view-section">
+            <div class="contenedor vista">
+                <div class="vista-cabecera">
+                    <h1>Hacer una Reserva</h1>
+                    <p>Elige salón, día y franja, y déjanos tus datos para confirmarla.</p>
+                </div>
+
+                <div class="reserva">
+                    <div class="reserva__formulario">
+                        <form id="form-reserva" onsubmit="return manejarEnvioReserva(event);">
+                            <fieldset>
+                                <legend>Tu reserva</legend>
+                                <div class="campos">
+                                    <div class="campo campo--ancho">
+                                        <label for="salon-reserva">Selecciona el Salón:</label>
+                                        <select id="salon-reserva" class="form-control" required>
+                                            <option value="">-- Seleccionar Salón --</option>
+                                            <option value="Salón A">Salón A</option>
+                                            <option value="Salón B">Salón B</option>
+                                            <option value="Salón A y B">Salón A y B</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="campo">
+                                        <label for="fecha">Fecha de Reserva:</label>
+                                        <input type="date" id="fecha" class="form-control" required>
+                                    </div>
+
+                                    <div class="campo">
+                                        <label for="franja">Franja horaria:</label>
+                                        <select id="franja" class="form-control" required>
+                                            <option value="">-- Seleccionar franja --</option>
+                                            <option value="Mañana">Mañana</option>
+                                            <option value="Tarde">Tarde</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Tus datos</legend>
+                                <div class="campos">
+                                    <div class="campo">
+                                        <label for="nombre">Nombre:</label>
+                                        <input type="text" id="nombre" class="form-control" placeholder="Tu nombre" maxlength="50" autocomplete="given-name" required>
+                                    </div>
+
+                                    <div class="campo">
+                                        <label for="apellidos">Apellidos:</label>
+                                        <input type="text" id="apellidos" class="form-control" placeholder="Tus apellidos" maxlength="100" autocomplete="family-name" required>
+                                    </div>
+
+                                    <div class="campo campo--ancho">
+                                        <label for="email">Correo electrónico:</label>
+                                        <input type="email" id="email" class="form-control" placeholder="tucorreo@ejemplo.com" maxlength="100" autocomplete="email" aria-describedby="ayuda-email" required>
+                                        <span class="campo__ayuda" id="ayuda-email">Con tu correo identificamos tus reservas.</span>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <button type="submit" class="boton boton--primario boton--bloque">Confirmar Reserva</button>
+                        </form>
+                    </div>
+
+                    <!-- Contenedor donde gestionReservas.js pinta las reservas guardadas en la base de datos -->
+                    <aside class="reserva__lista" aria-labelledby="titulo-lista">
+                        <h2 id="titulo-lista">Reservas registradas</h2>
+                        <div id="lista-reservas" aria-live="polite">Cargando reservas...</div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA 5: CALENDARIO -->
+        <section id="vista-calendario" class="view-section">
+            <div class="contenedor vista">
+                <div class="vista-cabecera">
+                    <h1>Calendario de Disponibilidad</h1>
+                    <p>Consulta aquí el calendario general de eventos para planificar tu reserva con antelación.</p>
+                </div>
+
+                <div class="calendario__hueco">
+                    [ Visualizador de Calendario Interactivo / Mes Actual ]
+                </div>
+
+                <p class="calendario__enlace"><a class="volver" href="#" onclick="cambiarVista('reservas'); return false;">Ir al formulario de reservas &rarr;</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <div class="pie__interior">
+            <div>
+                <h2>La Guardia de Jaén</h2>
+                <address>
+                    <p><strong>Dirección:</strong> Las allanadas, La guardia de jaén, Jaén (C.P. 23170)</p>
+                </address>
+            </div>
+            <div>
+                <h2>Contacto</h2>
+                <p>Teléfono: (55) 1234 5678</p>
+                <p>Email: hola@sitioincreible.com</p>
+            </div>
+            <div>
+                <h2>Horarios</h2>
+                <p>Lunes a Viernes de 8:00 a 17:00</p>
+            </div>
+            <p class="pie__legal">&copy; 2026 Sistema de Gestión de Reservas - Cerro de la Guardia.</p>
+        </div>
+    </footer>
+
+    <!-- Script de control de pestañas y menú -->
+    <script>
+        var TITULO_BASE = document.title;
+        var TITULOS_VISTA = {
+            inicio: TITULO_BASE,
+            salas: 'Salas - ' + TITULO_BASE,
+            detalle: 'Detalle del salón - ' + TITULO_BASE,
+            reservas: 'Reservas - ' + TITULO_BASE,
+            calendario: 'Calendario - ' + TITULO_BASE
+        };
+
+        // vistaId: 'inicio' | 'salas' | 'detalle' | 'reservas' | 'calendario'
+        // salon (opcional): deja ese salón ya elegido en el formulario de reservas
+        function cambiarVista(vistaId, salon) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.view-section').forEach(function (sec) { sec.classList.remove('active'); });
+
+            // Quitar la marca de "página actual" a todos los botones del nav
+            document.querySelectorAll('.nav-links button').forEach(function (btn) {
+                btn.classList.remove('active');
+                btn.removeAttribute('aria-current');
+            });
+
+            // Mostrar la sección seleccionada y activar su botón correspondiente
+            var vista = document.getElementById('vista-' + vistaId);
+            vista.classList.add('active');
+            var btnTarget = document.getElementById('nav-' + vistaId);
+            if (btnTarget) {
+                btnTarget.classList.add('active');
+                btnTarget.setAttribute('aria-current', 'page');
+            }
+
+            // Dejar el salón elegido en el formulario
+            if (salon) {
+                var selector = document.getElementById('salon-reserva');
+                if (selector) selector.value = salon;
+            }
+
+            document.title = TITULOS_VISTA[vistaId] || TITULO_BASE;
+            cerrarMenu();
+
+            // Subir arriba (sin animación si la persona lo tiene desactivado en su sistema)
+            var sinAnimacion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: sinAnimacion ? 'auto' : 'smooth' });
+
+            // Llevar el foco al título para que lectores de pantalla anuncien la nueva vista
+            var titulo = vista.querySelector('h1');
+            if (titulo) {
+                titulo.setAttribute('tabindex', '-1');
+                titulo.focus({ preventScroll: true });
+            }
+        }
+
+        // Menú desplegable (solo se usa en pantallas pequeñas)
+        var botonMenu = document.getElementById('menu-toggle');
+        var menu = document.getElementById('menu-principal');
+
+        function cerrarMenu() {
+            menu.classList.remove('abierto');
+            botonMenu.setAttribute('aria-expanded', 'false');
+        }
+
+        botonMenu.addEventListener('click', function () {
+            var abierto = menu.classList.toggle('abierto');
+            botonMenu.setAttribute('aria-expanded', String(abierto));
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') cerrarMenu();
+        });
+    </script>
+
+    <!-- ÚNICA referencia al script de reservas, al final del body -->
+    <script src="gestionReservas.js"></script>
+</body>
+
+</html>
