@@ -34,7 +34,6 @@
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
 }
 
 body {
@@ -45,6 +44,25 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Estilos propios para la tarjeta de salón */
+.card-salon {
+  background-color: var(--bg-card);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.card-salon__img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-salon__contenido {
+  padding: 16px;
 }
 
 /* ==========================================================================
@@ -123,7 +141,7 @@ nav {
 nav button {
   background: transparent;
   border: none;
-  color: #ffffff;
+  
   font-weight: 600;
   padding: 0.5rem 1rem;
   margin: 0.25rem 0.5rem;
@@ -158,7 +176,7 @@ main,
 .hero,
 .hero-section {
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('img/fondo-cerro.jpg') no-repeat center center/cover;
+    url(../documentos/imagenes/terraza.jpeg) no-repeat center center/cover;
   text-align: center;
   padding: 3rem 1.5rem;
   color: white;
@@ -209,7 +227,7 @@ article,
 .card {
   background: var(--bg-card);
   border-radius: var(--border-radius);
-  padding: 1.8rem;
+
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
@@ -217,6 +235,8 @@ article,
   border: 1px solid #eee;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  
 }
 
 article:hover {
