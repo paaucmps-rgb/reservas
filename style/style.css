@@ -141,7 +141,7 @@ nav {
 nav button {
   background: transparent;
   border: none;
-  color: #ffffff;
+  
   font-weight: 600;
   padding: 0.5rem 1rem;
   margin: 0.25rem 0.5rem;
@@ -176,7 +176,7 @@ main,
 .hero,
 .hero-section {
   background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('img/fondo-cerro.jpg') no-repeat center center/cover;
+    url(../documentos/imagenes/terraza.jpeg) no-repeat center center/cover;
   text-align: center;
   padding: 3rem 1.5rem;
   color: white;
@@ -235,6 +235,8 @@ article,
   border: 1px solid #eee;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  
 }
 
 article:hover {
