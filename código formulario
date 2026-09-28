@@ -1,0 +1,197 @@
+/**
+ * RESERVAS — EL CASTILLO & SALAS DEL CERRO
+ * Backend gratuito con Google Apps Script.
+ *
+ * Instalación:
+ * 1. Abre tu Google Sheet de respuestas > Extensiones > Apps Script.
+ * 2. Pega este archivo entero (sustituye el Code.gs por defecto).
+ * 3. Rellena el bloque CONFIG de abajo con tus datos reales.
+ * 4. Activadores (icono del reloj) > Añadir activador:
+ *      función: onFormSubmit   |   evento: Al enviarse el formulario
+ * 5. Guarda y autoriza los permisos que te pida Google (Calendar + Gmail).
+ */
+
+const CONFIG = {
+  // IDs de los calendarios (Ajustes del calendario > "ID de calendario")
+  calendarios: {
+    'El Castillo': '28974e37b6016f21535679e168f347c70915301e58f9dbd37a0fd534ea7e2017@group.calendar.google.com',
+    'Salas del Cerro': '22c6a84ce2d35e056e482ffe0401f9bf68fa6659fa379ebb635f748812f312f8@group.calendar.google.com'
+  },
+  // ⚠️ CAMBIA ESTO por tu correo real — ahora mismo sigue con el valor de ejemplo
+  emailAdmin: 'reservaslaguardiadejaen@gmail.com',
+  // Duración por defecto del evento si no se puede deducir (en horas)
+  duracionHorasPorDefecto: 4,
+  // Nombre que aparece como remitente de los correos
+  nombreRemitente: 'El Castillo & Salas del Cerro'
+};
+
+// Columnas de TU Sheet, en el orden real que tiene ahora mismo:
+// A) Marca temporal  B) Dirección de correo (la añade Google sola)
+// C) Nombre  D) Correo electrónico  E) Teléfono
+// F) Fecha  G) Hora  H) Número de personas  I) Tipo de evento
+// J) Espacio  K) Estado (la rellena el script)
+const COL = {
+  TIMESTAMP: 1,
+  EMAIL_AUTO: 2, // la añadió Google sola, no se usa
+  NOMBRE: 3,
+  EMAIL: 4,
+  TELEFONO: 5,
+  FECHA: 6,
+  HORA: 7,
+  PERSONAS: 8,
+  TIPO: 9,
+  ESPACIO: 10,
+  ESTADO: 11 // el script escribe aquí el resultado
+};
+
+/**
+ * Se ejecuta automáticamente cada vez que alguien envía el formulario.
+ */
+function onFormSubmit(e) {
+  const sheet = e.range.getSheet();
+  const row = e.range.getRow();
+  const values = sheet.getRange(row, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const datos = {
+    nombre: values[COL.NOMBRE - 1],
+    email: values[COL.EMAIL - 1],
+    telefono: values[COL.TELEFONO - 1],
+    espacio: values[COL.ESPACIO - 1],
+    fecha: values[COL.FECHA - 1],
+    hora: values[COL.HORA - 1],
+    personas: values[COL.PERSONAS - 1],
+    tipo: values[COL.TIPO - 1]
+  };
+
+  try {
+    procesarReserva(sheet, row, datos);
+  } catch (err) {
+    sheet.getRange(row, COL.ESTADO).setValue('ERROR: ' + err.message);
+    MailApp.sendEmail({
+      to: CONFIG.emailAdmin,
+      subject: '⚠️ Error procesando una reserva',
+      body: 'Ha fallado el procesamiento automático de una solicitud.\n\n' +
+            'Fila: ' + row + '\nDatos: ' + JSON.stringify(datos) + '\n\nError: ' + err.message
+    });
+  }
+}
+
+/**
+ * Busca el ID del calendario sin importar mayúsculas, minúsculas
+ * o espacios de más al principio/final (ej. "EL CASTILLO" también vale).
+ */
+function obtenerCalendarId(espacio) {
+  const claves = Object.keys(CONFIG.calendarios);
+  const encontrada = claves.find(
+    k => k.trim().toLowerCase() === String(espacio).trim().toLowerCase()
+  );
+  return encontrada ? CONFIG.calendarios[encontrada] : null;
+}
+
+function procesarReserva(sheet, row, datos) {
+  const calendarId = obtenerCalendarId(datos.espacio);
+  if (!calendarId) {
+    throw new Error('Espacio no reconocido: "' + datos.espacio + '"');
+  }
+  const calendario = CalendarApp.getCalendarById(calendarId);
+  if (!calendario) {
+    throw new Error('No se pudo acceder al calendario de "' + datos.espacio + '"');
+  }
+
+  const inicio = combinarFechaHora(datos.fecha, datos.hora);
+  const fin = new Date(inicio.getTime() + CONFIG.duracionHorasPorDefecto * 60 * 60 * 1000);
+
+  const eventosSolapados = calendario.getEvents(inicio, fin);
+  const libre = eventosSolapados.length === 0;
+
+  if (libre) {
+    calendario.createEvent(
+      datos.espacio + ' — ' + datos.nombre,
+      inicio,
+      fin,
+      {
+        description:
+          'Tipo de evento: ' + datos.tipo + '\n' +
+          'Personas: ' + datos.personas + '\n' +
+          'Teléfono: ' + datos.telefono + '\n',
+        guests: datos.email,
+        sendInvites: true
+      }
+    );
+
+    sheet.getRange(row, COL.ESTADO).setValue('Confirmada automáticamente');
+
+    enviarCorreoCliente(datos, true);
+    enviarCorreoAdmin(datos, true, null);
+
+  } else {
+    sheet.getRange(row, COL.ESTADO).setValue('Pendiente — revisar solapamiento');
+
+    enviarCorreoCliente(datos, false);
+    enviarCorreoAdmin(datos, false, eventosSolapados);
+  }
+}
+
+function combinarFechaHora(fecha, hora) {
+  // "fecha" y "hora" llegan como objetos Date de Sheets; combinamos
+  // el día de una con la hora de la otra.
+  const f = new Date(fecha);
+  const h = new Date(hora);
+  return new Date(f.getFullYear(), f.getMonth(), f.getDate(), h.getHours(), h.getMinutes());
+}
+
+function enviarCorreoCliente(datos, confirmada) {
+  const asunto = confirmada
+    ? 'Reserva confirmada — ' + datos.espacio
+    : 'Hemos recibido tu solicitud — ' + datos.espacio;
+
+  const cuerpo = confirmada
+    ? 'Hola ' + datos.nombre + ',\n\n' +
+      'Tu reserva de "' + datos.espacio + '" para el ' + formatearFecha(datos.fecha) +
+      ' a las ' + formatearHora(datos.hora) + ' ha quedado CONFIRMADA.\n\n' +
+      'Te llegará también una invitación de Google Calendar con el evento.\n\n' +
+      'Cualquier duda, responde a este correo.\n\n' + CONFIG.nombreRemitente
+    : 'Hola ' + datos.nombre + ',\n\n' +
+      'Hemos recibido tu solicitud de "' + datos.espacio + '" para el ' + formatearFecha(datos.fecha) +
+      ' a las ' + formatearHora(datos.hora) + '.\n\n' +
+      'Esa franja tiene otra reserva pendiente de confirmar, así que la estamos revisando ' +
+      'manualmente y te escribiremos en menos de 48 horas con la confirmación o una alternativa.\n\n' +
+      CONFIG.nombreRemitente;
+
+  MailApp.sendEmail({ to: datos.email, subject: asunto, body: cuerpo, name: CONFIG.nombreRemitente });
+}
+
+function enviarCorreoAdmin(datos, confirmada, conflictos) {
+  const asunto = confirmada
+    ? 'Nueva reserva confirmada: ' + datos.espacio + ' · ' + formatearFecha(datos.fecha)
+    : '⚠️ Solicitud con posible solapamiento: ' + datos.espacio;
+
+  let cuerpo =
+    'Espacio: ' + datos.espacio + '\n' +
+    'Fecha: ' + formatearFecha(datos.fecha) + ' — ' + formatearHora(datos.hora) + '\n' +
+    'Nombre: ' + datos.nombre + '\n' +
+    'Email: ' + datos.email + '\n' +
+    'Teléfono: ' + datos.telefono + '\n' +
+    'Personas: ' + datos.personas + '\n' +
+    'Tipo de evento: ' + datos.tipo + '\n';
+
+  if (!confirmada && conflictos) {
+    cuerpo += '\nEventos ya existentes en esa franja:\n';
+    conflictos.forEach(function (ev) {
+      cuerpo += '- ' + ev.getTitle() + ' (' + ev.getStartTime() + ' – ' + ev.getEndTime() + ')\n';
+    });
+    cuerpo += '\nRevisa la hoja de respuestas y decide manualmente cómo resolverlo.';
+  } else {
+    cuerpo += '\nSe ha creado el evento en el calendario automáticamente.';
+  }
+
+  MailApp.sendEmail({ to: CONFIG.emailAdmin, subject: asunto, body: cuerpo });
+}
+
+function formatearFecha(fecha) {
+  return Utilities.formatDate(new Date(fecha), Session.getScriptTimeZone(), 'dd/MM/yyyy');
+}
+
+function formatearHora(hora) {
+  return Utilities.formatDate(new Date(hora), Session.getScriptTimeZone(), 'HH:mm');
+}
