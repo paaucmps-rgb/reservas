@@ -28,10 +28,15 @@
     <div class="container">
         <!-- VISTA 1: INICIO -->
         <section id="vista-inicio" class="view-section active">
-            <div class="hero">
-                <h1>Portal de Salones - Cerro de la Guardia</h1>
-                <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
-            </div>
+            <!-- DÓNDE: En la sección #vista-inicio (Línea 29-34) -->
+
+<div class="hero">
+    <!-- AÑADIR ESTA LÍNEA -->
+    <img src="documentos/imagenes/terraza.jpeg" alt="Terraza del Cerro" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+    
+    <h1>Portal de Salones - Cerro de la Guardia</h1>
+    <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
+</div>
             <div style="text-align: center; margin-top: 2rem;">
                 <button class="btn-primary" style="display: inline-block; width: auto; margin-right: 1rem;" onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
                 <button class="btn-primary" style="display: inline-block; width: auto; background-color: var(--color-deportivo);" onclick="cambiarVista('reservas')">Hacer una Reserva</button>
