@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salones Cerro de las Allanadas - La Guardia de Jaén</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
-<script src="gestionReservas.js"></script>
 <body>
-
 
     <!-- BARRA DE NAVEGACIÓN -->
     <header class="navbar">
@@ -28,20 +25,23 @@
         </nav>
     </header>
 
-
     <div class="container">
         <!-- VISTA 1: INICIO -->
         <section id="vista-inicio" class="view-section active">
-            <div class="hero">
-                <h1>Portal de Salones - Cerro de la Guardia</h1>
-                <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
-            </div>
+            <!-- DÓNDE: En la sección #vista-inicio (Línea 29-34) -->
+
+<div class="hero">
+    <!-- AÑADIR ESTA LÍNEA -->
+    <img src="documentos/imagenes/terraza.jpeg" alt="Terraza del Cerro" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+    
+    <h1>Portal de Salones - Cerro de la Guardia</h1>
+    <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
+</div>
             <div style="text-align: center; margin-top: 2rem;">
                 <button class="btn-primary" style="display: inline-block; width: auto; margin-right: 1rem;" onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
                 <button class="btn-primary" style="display: inline-block; width: auto; background-color: var(--color-deportivo);" onclick="cambiarVista('reservas')">Hacer una Reserva</button>
             </div>
         </section>
-
 
         <!-- VISTA 2: SALAS -->
         <section id="vista-salas" class="view-section">
@@ -67,7 +67,6 @@
                     </div>
                 </article>
 
-
                 <article class="card-salon">
 <!-- Creado por Alejandra Carmona -->                  
                     <img src="documentos/imagenes/puerta.jpeg" alt="Salón B">
@@ -86,7 +85,6 @@
                         <button class="btn-reserva" onclick="cambiarVista('reservas')">RESERVAR</button>
                     </div>
                 </article>
-
 
                 <article class="card-salon">
  <!-- Creado por Alejandra Carmona -->                  
@@ -109,23 +107,20 @@
             </div>
         </section>
 
-
         <!-- VISTA 3: DETALLE SALÓN -->
         <section id="vista-detalle" class="view-section">
             <p style="margin-bottom: 1rem;"><a href="#" onclick="cambiarVista('salas'); return false;" style="color: var(--color-accent); text-decoration: none; font-weight: bold;">&larr; Volver al listado de espacios</a></p>
            
             <div class="card">
                 <header style="margin-bottom: 1rem;">
-                    <h1 style="color: var(--color-accent); font-size: 1.8rem;">Salón del Trono</h1>
+                    <h1 style="color: var(--color-accent); font-size: 1.8rem;">Detalle del Salón</h1>
                 </header>
-
 
                 <section style="margin-top: 1rem;">
                     <h3>Información General</h3>
                     <p><strong>Aforo máximo:</strong> 150 personas</p>
                     <p><strong>Descripción:</strong> Espacio histórico amplio diseñado para recepciones solemnes, visitas guiadas privadas y eventos institucionales.</p>
                 </section>
-
 
                 <section style="margin-top: 1rem;">
                     <h3>Características</h3>
@@ -137,12 +132,15 @@
             </div>
         </section>
 
-
         <!-- VISTA 4: RESERVAS -->
         <section id="vista-reservas" class="view-section">
+            <div id="lista-reservas"></div>
             <div class="card" style="max-width: 600px; margin: 0 auto;">
                 <h2 style="color: var(--color-accent); margin-bottom: 1.5rem; text-align: center;">Hacer una Reserva</h2>
-                <form onsubmit="event.preventDefault(); alert('¡Reserva registrada con éxito!');">
+                
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScrTi0ko1Dv-txa19lgSqE2Q246qPQ-njrxVTjhGB3G7_3R0Q/viewform?embedded=true" width="640" height="1617" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+
+                <!-- <form id="form-reserva" onsubmit="return manejarEnvioReserva(event);">
                     <div class="form-group">
                         <label for="salon-reserva">Selecciona el Salón:</label>
                         <select id="salon-reserva" class="form-control" required>
@@ -153,30 +151,29 @@
                         </select>
                     </div>
 
-
                     <div class="form-group">
                         <label for="nombre">Nombre Completo:</label>
                         <input type="text" id="nombre" class="form-control" placeholder="Tu nombre" required>
                     </div>
-
 
                     <div class="form-group">
                         <label for="fecha">Fecha de Reserva:</label>
                         <input type="date" id="fecha" class="form-control" required>
                     </div>
 
-
                     <div class="form-group">
-                        <label for="hora">Hora:</label>
-                        <input type="time" id="hora" class="form-control" required>
+                        <label for="franja">Franja horaria:</label>
+                        <select id="franja" class="form-control" required>
+                            <option value="">-- Seleccionar franja --</option>
+                            <option value="Mañana">Mañana</option>
+                            <option value="Tarde">Tarde</option>
+                        </select>
                     </div>
 
-
                     <button type="submit" class="btn-primary" style="margin-top: 1rem;">Confirmar Reserva</button>
-                </form>
+                </form> -->
             </div>
         </section>
-
 
         <!-- VISTA 5: CALENDARIO -->
         <section id="vista-calendario" class="view-section">
@@ -191,7 +188,6 @@
         </section>
     </div>
 
-
     <footer>
         <h3>LA GUARDIA DE JAÉN</h3>
         <p><strong>Dirección:</strong> Las allanadas, La guardia de jaén, Jaén (C.P. 23170)</p>
@@ -200,7 +196,6 @@
         <p style="margin-top: 1rem; font-size: 0.8rem; color: #aaa;">&copy; 2026 Sistema de Gestión de Reservas - Cerro de la Guardia.</p>
     </footer>
 
-
     <!-- Script de control de pestañas -->
     <script>
         function cambiarVista(vistaId) {
@@ -208,26 +203,25 @@
             const secciones = document.querySelectorAll('.view-section');
             secciones.forEach(sec => sec.classList.remove('active'));
 
-
             // Quitar clase active a todos los botones del nav
             const botones = document.querySelectorAll('.nav-links button');
             botones.forEach(btn => btn.classList.remove('active'));
-
 
             // Mostrar la sección seleccionada y activar su botón correspondiente
             document.getElementById('vista-' + vistaId).classList.add('active');
             const btnTarget = document.getElementById('nav-' + vistaId);
             if(btnTarget) btnTarget.classList.add('active');
 
-
             // Subir arriba de la página suavemente
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
-<!-- Contenedor donde tu JS pintará las reservas automáticamente -->
-<div id="lista-reservas"></div>
+
+    <!-- Contenedor donde tu JS pintará las reservas automáticamente -->
+    
+
+    <!-- ÚNICA referencia al script de reservas, al final del body -->
+    <script src="gestionReservas.js"></script>
 </body>
 
-
 </html>
-
