@@ -235,6 +235,8 @@ article,
   border: 1px solid #eee;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  
 }
 
 article:hover {
