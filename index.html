@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salones Cerro de las Allanadas - La Guardia de Jaén</title>
     <link rel="stylesheet" href="style/style.css">
+    <!-- NUEVO: mejoras (botón atrás, galería, móvil, formulario). Debe ir DESPUÉS de style.css -->
+    <link rel="stylesheet" href="style/mejoras.css">
 </head>
 <body>
 
     <!-- BARRA DE NAVEGACIÓN -->
     <header class="navbar">
+        <!-- NUEVO: botón de retroceso -->
+        <button id="btn-atras" class="btn-atras" onclick="irAtras()" aria-label="Volver atrás" hidden>&larr; Atrás</button>
+
         <a href="#" class="nav-brand" onclick="cambiarVista('inicio'); return false;" style="text-decoration: none;">
             <span>Cerro de la Guardia (Jaén)</span>
         </a>
@@ -18,9 +23,8 @@
             <ul class="nav-links">
                 <li><button onclick="cambiarVista('inicio')" id="nav-inicio" class="active">Inicio</button></li>
                 <li><button onclick="cambiarVista('salas')" id="nav-salas">Salas</button></li>
-                <li><button onclick="cambiarVista('detalle')" id="nav-detalle">Detalle Salón</button></li>
+                <li><button onclick="verDetalle('a')" id="nav-detalle">Detalle Salón</button></li>
                 <li><button onclick="cambiarVista('reservas')" id="nav-reservas">Reservas</button></li>
-                <!-- <li><button onclick="cambiarVista('calendario')" id="nav-calendario">Calendario</button></li> -->
             </ul>
         </nav>
     </header>
@@ -28,164 +32,66 @@
     <div class="container">
         <!-- VISTA 1: INICIO -->
         <section id="vista-inicio" class="view-section active">
-            <!-- DÓNDE: En la sección #vista-inicio (Línea 29-34) -->
-
-<div class="hero">
-    <!-- AÑADIR ESTA LÍNEA -->
-    <img src="documentos/imagenes/terraza.jpeg" alt="Terraza del Cerro" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
-    
-    <h1>Portal de Salones - Cerro de la Guardia</h1>
-    <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
-</div>
-            <div style="text-align: center; margin-top: 2rem;">
-                <button class="btn-primary" style="display: inline-block; width: auto; margin-right: 1rem;" onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
-                <button class="btn-primary" style="display: inline-block; width: auto; background-color: var(--color-deportivo);" onclick="cambiarVista('reservas')">Hacer una Reserva</button>
+            <div class="hero">
+                <img src="documentos/imagenes/terraza.jpeg" alt="Terraza del Cerro" class="hero-img">
+                <h1>Portal de Salones - Cerro de la Guardia</h1>
+                <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
+            </div>
+            <div class="acciones-inicio">
+                <button class="btn-primary" onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
+                <button class="btn-primary" style="background-color: var(--color-deportivo);" onclick="cambiarVista('reservas')">Hacer una Reserva</button>
             </div>
         </section>
 
         <!-- VISTA 2: SALAS -->
         <section id="vista-salas" class="view-section">
             <h2>Salas disponibles</h2>
+            <p class="pista-galeria">Haz doble clic (o doble toque) en una foto para ver el interior del salón.</p>
             <div class="grid-cards">
-                <article class="card-salon">
-<!-- Creado por Alejandra Carmona -->
-<!-- Se trata de la subida de imágenes, en este caso del salón -->
-                  <img src="documentos/imagenes/salon.jpeg" alt="Salón A">
-                    <div class="card-body">
-                        <div>
-                            <span class="etiqueta">SALÓN A</span>
-                            <ul>
-                                <li>Precio: 200 € / día</li>
-                                <li>Capacidad: 80 - 100 personas</li>
-                                <li>Mobiliario incluido (mesas y sillas)</li>
-                                <li>Acceso a zonas comunes exteriores</li>
-                                <li>Climatización y aseos</li>
-                                <li>Fianza requerida: 150 € (reembolsable)</li>
-                            </ul>
-                        </div>
-                        <button class="btn-reserva" onclick="cambiarVista('reservas')">RESERVAR</button>
-                    </div>
-                </article>
-
-                <article class="card-salon">
-<!-- Creado por Alejandra Carmona -->                  
-                    <img src="documentos/imagenes/puerta.jpeg" alt="Salón B">
-                    <div class="card-body">
-                        <div>
-                            <span class="etiqueta">SALÓN B</span>
-                            <ul>
-                                <li>Precio: 200 € / día</li>
-                                <li>Capacidad: 80 - 100 personas</li>
-                                <li>Mobiliario incluido (mesas y sillas)</li>
-                                <li>Acceso a zonas comunes exteriores</li>
-                                <li>Climatización y aseos</li>
-                                <li>Fianza requerida: 150 € (reembolsable)</li>
-                            </ul>
-                        </div>
-                        <button class="btn-reserva" onclick="cambiarVista('reservas')">RESERVAR</button>
-                    </div>
-                </article>
-
-                <article class="card-salon">
- <!-- Creado por Alejandra Carmona -->                  
-                  <img src="documentos/imagenes/puerta.jpeg" alt="Salones A y B">
-                    <div class="card-body">
-                        <div>
-                            <span class="etiqueta">SALONES A Y B</span>
-                            <ul>
-                                <li>Precio: 350 € / día</li>
-                                <li>Uso exclusivo de ambos salones</li>
-                                <li>Mayor espacio y flexibilidad para grandes eventos</li>
-                                <li>Acceso total a las zonas exteriores</li>
-                                <li>Ideal para eventos más grandes</li>
-                                <li>Fianza requerida: 250 € (reembolsable)</li>
-                            </ul>
-                        </div>
-                        <button class="btn-reserva" onclick="cambiarVista('reservas')">RESERVAR</button>
-                    </div>
-                </article>
+                <!-- Las tarjetas se generan desde el objeto SALONES (más abajo, en el script) -->
             </div>
         </section>
 
         <!-- VISTA 3: DETALLE SALÓN -->
         <section id="vista-detalle" class="view-section">
             <p style="margin-bottom: 1rem;"><a href="#" onclick="cambiarVista('salas'); return false;" style="color: var(--color-accent); text-decoration: none; font-weight: bold;">&larr; Volver al listado de espacios</a></p>
-           
-            <div class="card">
-                <header style="margin-bottom: 1rem;">
-                    <h1 style="color: var(--color-accent); font-size: 1.8rem;">Detalle del Salón</h1>
-                </header>
 
-                <section style="margin-top: 1rem;">
-                    <h3>Información General</h3>
-                    <p><strong>Aforo máximo:</strong> 150 personas</p>
-                    <p><strong>Descripción:</strong> Espacio histórico amplio diseñado para recepciones solemnes, visitas guiadas privadas y eventos institucionales.</p>
-                </section>
+            <!-- Pestañas para elegir salón -->
+            <div class="tabs-salon" id="tabs-salon"></div>
 
-                <section style="margin-top: 1rem;">
-                    <h3>Características</h3>
-                    <ul style="margin-left: 1.5rem; color: var(--text-muted);">
-                        <li>Climatización e iluminación adaptada.</li>
-                        <li>Acceso para personas con movilidad reducida.</li>
-                    </ul>
-                </section>
-            </div>
+            <div class="card" id="detalle-contenido"></div>
         </section>
 
         <!-- VISTA 4: RESERVAS -->
         <section id="vista-reservas" class="view-section">
             <div id="lista-reservas"></div>
-            <div class="card" style="max-width: 600px; margin: 0 auto;">
-                <h2 style="color: var(--color-accent); margin-bottom: 1.5rem; text-align: center;">Hacer una Reserva</h2>
-                
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScrTi0ko1Dv-txa19lgSqE2Q246qPQ-njrxVTjhGB3G7_3R0Q/viewform?embedded=true" width="640" height="1617" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+            <div class="card form-card">
+                <h2 style="color: var(--color-accent); margin-bottom: 1rem; text-align: center;">Hacer una Reserva</h2>
 
-                <!-- <form id="form-reserva" onsubmit="return manejarEnvioReserva(event);">
-                    <div class="form-group">
-                        <label for="salon-reserva">Selecciona el Salón:</label>
-                        <select id="salon-reserva" class="form-control" required>
-                            <option value="">-- Seleccionar Salón --</option>
-                            <option value="Salón A">Salón A</option>
-                            <option value="Salón B">Salón B</option>
-                            <option value="Salón A y B">Salón A y B</option>
-                        </select>
-                    </div>
+                <!-- NUEVO: selector de salón antes del formulario -->
+                <div class="selector-salon">
+                    <p class="selector-titulo">1. Elige el salón:</p>
+                    <div class="selector-opciones" id="selector-opciones"></div>
+                    <p id="salon-elegido" class="salon-elegido">Aún no has elegido salón.</p>
+                </div>
 
-                    <div class="form-group">
-                        <label for="nombre">Nombre Completo:</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Tu nombre" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fecha">Fecha de Reserva:</label>
-                        <input type="date" id="fecha" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="franja">Franja horaria:</label>
-                        <select id="franja" class="form-control" required>
-                            <option value="">-- Seleccionar franja --</option>
-                            <option value="Mañana">Mañana</option>
-                            <option value="Tarde">Tarde</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn-primary" style="margin-top: 1rem;">Confirmar Reserva</button>
-                </form> -->
+                <p class="selector-titulo">2. Rellena el formulario:</p>
+                <div class="form-wrap">
+                    <iframe id="form-iframe" src="" frameborder="0" marginheight="0" marginwidth="0" title="Formulario de reserva">Cargando…</iframe>
+                </div>
             </div>
         </section>
+    </div>
 
-        <!-- VISTA 5: CALENDARIO -->
-        <!-- <section id="vista-calendario" class="view-section">
-            <div class="card" style="text-align: center;">
-                <h2>Calendario de Disponibilidad</h2>
-                <p style="color: var(--text-muted); margin-top: 0.5rem;">Consulta aquí el calendario general de eventos para planificar tu reserva con antelación.</p>
-                <div style="margin: 30px 0; padding: 40px; background: #f4f6f9; border-radius: 8px; color: var(--text-muted);">
-                    [ Visualizador de Calendario Interactivo / Mes Actual ]
-                </div>
-                <p><a href="#" onclick="cambiarVista('reservas'); return false;" style="color: var(--color-accent); font-weight: bold; text-decoration: underline;">Ir al formulario de reservas &rarr;</a></p>
-            </div>
-        </section> -->
+    <!-- NUEVO: ventana de galería (lightbox) -->
+    <div id="galeria" class="galeria" hidden>
+        <button class="galeria-cerrar" onclick="cerrarGaleria()" aria-label="Cerrar">&times;</button>
+        <button class="galeria-flecha izq" onclick="moverGaleria(-1)" aria-label="Foto anterior">&#10094;</button>
+        <figure class="galeria-figura">
+            <img id="galeria-img" src="" alt="">
+            <figcaption id="galeria-pie"></figcaption>
+        </figure>
+        <button class="galeria-flecha der" onclick="moverGaleria(1)" aria-label="Foto siguiente">&#10095;</button>
     </div>
 
     <footer>
@@ -196,31 +102,315 @@
         <p style="margin-top: 1rem; font-size: 0.8rem; color: #aaa;">&copy; 2026 Sistema de Gestión de Reservas - Cerro de la Guardia.</p>
     </footer>
 
-    <!-- Script de control de pestañas -->
     <script>
-        function cambiarVista(vistaId) {
-            // Ocultar todas las secciones
-            const secciones = document.querySelectorAll('.view-section');
-            secciones.forEach(sec => sec.classList.remove('active'));
+        /* ==========================================================
+           DATOS DE LOS SALONES  <-- EDITA AQUÍ precios, fotos y detalles
+           - fotos: la primera es la de la tarjeta. Añade las del INTERIOR.
+             Las que no existan en la carpeta se ignoran automáticamente.
+           ========================================================== */
+        const SALONES = {
+            a: {
+                nombre: 'Salón A',
+                precio: '200 € / día',
+                aforo: '80 - 100 personas',
+                fianza: '150 € (reembolsable)',
+                descripcion: 'Salón con mobiliario incluido y acceso a las zonas comunes exteriores. Ideal para celebraciones de tamaño medio.',
+                resumen: [
+                    'Precio: 200 € / día',
+                    'Capacidad: 80 - 100 personas',
+                    'Mobiliario incluido (mesas y sillas)',
+                    'Acceso a zonas comunes exteriores',
+                    'Climatización y aseos',
+                    'Fianza requerida: 150 € (reembolsable)'
+                ],
+                caracteristicas: [
+                    'Mobiliario incluido (mesas y sillas)',
+                    'Climatización',
+                    'Aseos',
+                    'Acceso a zonas comunes exteriores'
+                ],
+                fotos: [
+                    'documentos/imagenes/salon.jpeg',
+                    'documentos/imagenes/salon-a-interior-1.jpeg',
+                    'documentos/imagenes/salon-a-interior-2.jpeg',
+                    'documentos/imagenes/salon-a-interior-3.jpeg'
+                ]
+            },
+            b: {
+                nombre: 'Salón B',
+                precio: '200 € / día',
+                aforo: '80 - 100 personas',
+                fianza: '150 € (reembolsable)',
+                descripcion: 'Salón con mobiliario incluido y acceso a las zonas comunes exteriores. Ideal para celebraciones de tamaño medio.',
+                resumen: [
+                    'Precio: 200 € / día',
+                    'Capacidad: 80 - 100 personas',
+                    'Mobiliario incluido (mesas y sillas)',
+                    'Acceso a zonas comunes exteriores',
+                    'Climatización y aseos',
+                    'Fianza requerida: 150 € (reembolsable)'
+                ],
+                caracteristicas: [
+                    'Mobiliario incluido (mesas y sillas)',
+                    'Climatización',
+                    'Aseos',
+                    'Acceso a zonas comunes exteriores'
+                ],
+                fotos: [
+                    'documentos/imagenes/puerta.jpeg',
+                    'documentos/imagenes/salon-b-interior-1.jpeg',
+                    'documentos/imagenes/salon-b-interior-2.jpeg',
+                    'documentos/imagenes/salon-b-interior-3.jpeg'
+                ]
+            },
+            ab: {
+                nombre: 'Salones A y B',
+                precio: '350 € / día',
+                aforo: '160 - 200 personas',
+                fianza: '250 € (reembolsable)',
+                descripcion: 'Uso exclusivo de ambos salones: más espacio y flexibilidad para grandes eventos.',
+                resumen: [
+                    'Precio: 350 € / día',
+                    'Uso exclusivo de ambos salones',
+                    'Mayor espacio y flexibilidad para grandes eventos',
+                    'Acceso total a las zonas exteriores',
+                    'Ideal para eventos más grandes',
+                    'Fianza requerida: 250 € (reembolsable)'
+                ],
+                caracteristicas: [
+                    'Uso exclusivo de ambos salones',
+                    'Acceso total a las zonas exteriores',
+                    'Mobiliario, climatización y aseos de los dos salones'
+                ],
+                fotos: [
+                    'documentos/imagenes/puerta.jpeg',
+                    'documentos/imagenes/salon.jpeg',
+                    'documentos/imagenes/salon-a-interior-1.jpeg',
+                    'documentos/imagenes/salon-b-interior-1.jpeg'
+                ]
+            }
+        };
 
-            // Quitar clase active a todos los botones del nav
-            const botones = document.querySelectorAll('.nav-links button');
-            botones.forEach(btn => btn.classList.remove('active'));
+        /* ----- Formulario de Google ----- */
+        const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScrTi0ko1Dv-txa19lgSqE2Q246qPQ-njrxVTjhGB3G7_3R0Q/viewform?embedded=true';
+        // Para que el salón elegido llegue ya marcado en el formulario, pon aquí el id de esa pregunta
+        // (en Google Forms: ⋮ > "Obtener enlace prellenado"), por ejemplo 'entry.123456789'. Si lo dejas vacío no se rellena.
+        const FORM_ENTRY_SALON = '';
+        const ALTURA_FORM = 1617;        // altura mientras se rellena
+        const ALTURA_CONFIRMACION = 420; // altura al enviar (sin espacio en blanco)
 
-            // Mostrar la sección seleccionada y activar su botón correspondiente
+        /* ==========================================================
+           NAVEGACIÓN + BOTÓN DE RETROCESO
+           ========================================================== */
+        let vistaActual = 'inicio';
+
+        function cambiarVista(vistaId, guardarHistorial = true) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
+
             document.getElementById('vista-' + vistaId).classList.add('active');
             const btnTarget = document.getElementById('nav-' + vistaId);
-            if(btnTarget) btnTarget.classList.add('active');
+            if (btnTarget) btnTarget.classList.add('active');
 
-            // Subir arriba de la página suavemente
+            if (guardarHistorial && vistaId !== vistaActual) {
+                history.pushState({ vista: vistaId }, '', '#' + vistaId);
+            }
+            vistaActual = vistaId;
+            document.getElementById('btn-atras').hidden = (vistaId === 'inicio');
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function irAtras() {
+            if (!document.getElementById('galeria').hidden) { cerrarGaleria(); return; }
+            if (history.state && history.state.vista && history.state.vista !== 'inicio') {
+                history.back();
+            } else {
+                cambiarVista('inicio');
+            }
+        }
+
+        // Botón "atrás" del navegador / del móvil
+        window.addEventListener('popstate', e => {
+            if (!document.getElementById('galeria').hidden) cerrarGaleria();
+            const v = (e.state && e.state.vista) || 'inicio';
+            cambiarVista(v, false);
+        });
+        history.replaceState({ vista: 'inicio' }, '', '#inicio');
+
+        /* ==========================================================
+           TARJETAS DE SALAS
+           ========================================================== */
+        function pintarSalas() {
+            const cont = document.querySelector('#vista-salas .grid-cards');
+            cont.innerHTML = Object.entries(SALONES).map(([id, s]) => `
+                <article class="card-salon">
+                    <img src="${s.fotos[0]}" alt="${s.nombre}" class="foto-clicable"
+                         title="Doble clic para ver más fotos" ondblclick="abrirGaleria('${id}')">
+                    <div class="card-body">
+                        <div>
+                            <span class="etiqueta">${s.nombre.toUpperCase()}</span>
+                            <ul>${s.resumen.map(r => `<li>${r}</li>`).join('')}</ul>
+                        </div>
+                        <div class="botones-card">
+                            <button class="btn-secundario" onclick="abrirGaleria('${id}')">VER FOTOS</button>
+                            <button class="btn-secundario" onclick="verDetalle('${id}')">DETALLES</button>
+                            <button class="btn-reserva" onclick="reservarSalon('${id}')">RESERVAR</button>
+                        </div>
+                    </div>
+                </article>`).join('');
+        }
+
+        /* ==========================================================
+           DETALLE POR SALÓN
+           ========================================================== */
+        function verDetalle(id) {
+            const s = SALONES[id];
+            document.getElementById('tabs-salon').innerHTML = Object.entries(SALONES).map(([k, v]) =>
+                `<button class="tab ${k === id ? 'active' : ''}" onclick="verDetalle('${k}')">${v.nombre}</button>`).join('');
+
+            document.getElementById('detalle-contenido').innerHTML = `
+                <header style="margin-bottom: 1rem;">
+                    <h1 style="color: var(--color-accent); font-size: 1.8rem;">${s.nombre}</h1>
+                </header>
+                <img src="${s.fotos[0]}" alt="${s.nombre}" class="foto-detalle foto-clicable"
+                     title="Doble clic para ver más fotos" ondblclick="abrirGaleria('${id}')">
+                <p><button class="btn-secundario" onclick="abrirGaleria('${id}')">Ver todas las fotos</button></p>
+                <section style="margin-top: 1rem;">
+                    <h3>Información General</h3>
+                    <p><strong>Aforo:</strong> ${s.aforo}</p>
+                    <p><strong>Precio:</strong> ${s.precio}</p>
+                    <p><strong>Fianza:</strong> ${s.fianza}</p>
+                    <p><strong>Descripción:</strong> ${s.descripcion}</p>
+                </section>
+                <section style="margin-top: 1rem;">
+                    <h3>Características</h3>
+                    <ul style="margin-left: 1.5rem; color: var(--text-muted);">
+                        ${s.caracteristicas.map(c => `<li>${c}</li>`).join('')}
+                    </ul>
+                </section>
+                <button class="btn-primary" style="margin-top: 1.2rem;" onclick="reservarSalon('${id}')">Reservar ${s.nombre}</button>`;
+
+            cambiarVista('detalle');
+            document.getElementById('nav-detalle').classList.add('active');
+        }
+
+        /* ==========================================================
+           GALERÍA (DOBLE CLIC)
+           ========================================================== */
+        let galeriaFotos = [], galeriaPos = 0, galeriaNombre = '';
+
+        function cargaOk(src) {
+            return new Promise(res => {
+                const i = new Image();
+                i.onload = () => res(true);
+                i.onerror = () => res(false);
+                i.src = src;
+            });
+        }
+
+        async function abrirGaleria(id) {
+            const s = SALONES[id];
+            const comprobadas = await Promise.all(s.fotos.map(cargaOk));
+            galeriaFotos = s.fotos.filter((_, i) => comprobadas[i]); // ignora fotos que no existan
+            if (!galeriaFotos.length) return;
+            galeriaNombre = s.nombre;
+            galeriaPos = 0;
+            mostrarFotoGaleria();
+            document.getElementById('galeria').hidden = false;
+            document.body.classList.add('sin-scroll');
+        }
+
+        function mostrarFotoGaleria() {
+            document.getElementById('galeria-img').src = galeriaFotos[galeriaPos];
+            document.getElementById('galeria-img').alt = galeriaNombre;
+            document.getElementById('galeria-pie').textContent =
+                `${galeriaNombre} · ${galeriaPos + 1} / ${galeriaFotos.length}`;
+        }
+
+        function moverGaleria(d) {
+            galeriaPos = (galeriaPos + d + galeriaFotos.length) % galeriaFotos.length;
+            mostrarFotoGaleria();
+        }
+
+        function cerrarGaleria() {
+            document.getElementById('galeria').hidden = true;
+            document.body.classList.remove('sin-scroll');
+        }
+
+        document.addEventListener('keydown', e => {
+            if (document.getElementById('galeria').hidden) return;
+            if (e.key === 'Escape') cerrarGaleria();
+            if (e.key === 'ArrowLeft') moverGaleria(-1);
+            if (e.key === 'ArrowRight') moverGaleria(1);
+        });
+        document.getElementById('galeria').addEventListener('click', e => {
+            if (e.target.id === 'galeria') cerrarGaleria();
+        });
+
+        /* ==========================================================
+           RESERVAS: selector de salón + formulario
+           ========================================================== */
+        let salonElegido = null;
+        let cargasForm = 0;
+
+        function pintarSelector() {
+            document.getElementById('selector-opciones').innerHTML = Object.entries(SALONES).map(([id, s]) =>
+                `<button type="button" class="opcion-salon" id="op-${id}" onclick="elegirSalon('${id}')">
+                    <strong>${s.nombre}</strong><span>${s.precio}</span>
+                 </button>`).join('');
+        }
+
+        function elegirSalon(id) {
+            salonElegido = id;
+            document.querySelectorAll('.opcion-salon').forEach(b => b.classList.remove('active'));
+            document.getElementById('op-' + id).classList.add('active');
+            const s = SALONES[id];
+            document.getElementById('salon-elegido').innerHTML =
+                `Has elegido: <strong>${s.nombre}</strong> (${s.precio}). Selecciónalo también en el formulario.`;
+            cargarFormulario();
+        }
+
+        // Desde las tarjetas / detalle: ir a reservas con el salón ya elegido
+        function reservarSalon(id) {
+            cambiarVista('reservas');
+            elegirSalon(id);
+        }
+
+        function cargarFormulario() {
+            const iframe = document.getElementById('form-iframe');
+            let url = FORM_URL;
+            if (FORM_ENTRY_SALON && salonElegido) {
+                url += '&' + FORM_ENTRY_SALON + '=' + encodeURIComponent(SALONES[salonElegido].nombre);
+            }
+            cargasForm = 0;
+            iframe.style.height = ALTURA_FORM + 'px';
+            iframe.src = url;
+        }
+
+        // Al enviar el formulario, Google recarga el iframe: la 2ª carga es la confirmación
+        document.getElementById('form-iframe').addEventListener('load', function () {
+            cargasForm++;
+            if (cargasForm > 1) {
+                this.style.height = ALTURA_CONFIRMACION + 'px'; // quita el espacio en blanco
+                this.scrollIntoView({ behavior: 'smooth', block: 'center' }); // sin scroll para ver la confirmación
+            }
+        });
+
+        // Si entran a Reservas sin elegir salón, se carga el formulario igualmente
+        const _cambiarVista = cambiarVista;
+        cambiarVista = function (vistaId, guardar) {
+            _cambiarVista(vistaId, guardar);
+            if (vistaId === 'reservas' && !document.getElementById('form-iframe').getAttribute('src')) {
+                cargarFormulario();
+            }
+        };
+
+        pintarSalas();
+        pintarSelector();
     </script>
 
-    <!-- Contenedor donde tu JS pintará las reservas automáticamente -->
-    
-
-    <!-- ÚNICA referencia al script de reservas, al final del body -->
+    <!-- Script de reservas (el tuyo) -->
     <script src="gestionReservas.js"></script>
 </body>
 
