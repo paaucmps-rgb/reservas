@@ -356,6 +356,36 @@ article p strong {
   background: #e67600;
 }
 
+.boton-volver-inicio {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.boton-volver-inicio:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.boton-volver-inicio:focus-visible {
+  outline: 3px solid #005fcc;
+  outline-offset: 3px;
+}
+
 /* Estilos de Formulario */
 form {
   background: var(--bg-card);
@@ -496,6 +526,11 @@ footer p {
   nav {
     flex-direction: column;
     gap: 0.5rem;
+  }
+
+  .boton-volver-inicio {
+    right: max(0.75rem, env(safe-area-inset-right));
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
   }
 
   .nav-links {
