@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Online</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>🎱 BINGO</h1>
+
+    <div id="numeroActual">
+        -
+    </div>
+
+    <button onclick="sacarNumero()">
+        SACAR NÚMERO
+    </button>
+
+    <h2>Números que han salido</h2>
+
+    <div id="numerosSalidos">
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
