@@ -20,7 +20,6 @@
                 <li><button onclick="cambiarVista('salas')" id="nav-salas">Salas</button></li>
                 <li><button onclick="cambiarVista('detalle')" id="nav-detalle">Detalle Salón</button></li>
                 <li><button onclick="cambiarVista('reservas')" id="nav-reservas">Reservas</button></li>
-                <li><button onclick="cambiarVista('calendario')" id="nav-calendario">Calendario</button></li>
             </ul>
         </nav>
     </header>
@@ -35,7 +34,7 @@
     <img src="documentos/imagenes/terraza.jpeg" alt="Terraza del Cerro" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
     
     <h1>Portal de Salones - Cerro de la Guardia</h1>
-    <p>Explora nuestros espacios, revisa el calendario de disponibilidad y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
+    <p>Explora nuestros espacios y gestiona tus reservas de forma rápida y sencilla desde un solo lugar.</p>
 </div>
             <div style="text-align: center; margin-top: 2rem;">
                 <button class="btn-primary" style="display: inline-block; width: auto; margin-right: 1rem;" onclick="cambiarVista('salas')">Ver Salas Disponibles</button>
@@ -175,17 +174,6 @@
             </div>
         </section>
 
-        <!-- VISTA 5: CALENDARIO -->
-        <section id="vista-calendario" class="view-section">
-            <div class="card" style="text-align: center;">
-                <h2>Calendario de Disponibilidad</h2>
-                <p style="color: var(--text-muted); margin-top: 0.5rem;">Consulta aquí el calendario general de eventos para planificar tu reserva con antelación.</p>
-                <div style="margin: 30px 0; padding: 40px; background: #f4f6f9; border-radius: 8px; color: var(--text-muted);">
-                    [ Visualizador de Calendario Interactivo / Mes Actual ]
-                </div>
-                <p><a href="#" onclick="cambiarVista('reservas'); return false;" style="color: var(--color-accent); font-weight: bold; text-decoration: underline;">Ir al formulario de reservas &rarr;</a></p>
-            </div>
-        </section>
     </div>
 
     <button type="button" class="boton-volver-inicio" onclick="cambiarVista('inicio')" aria-label="Volver al inicio">
