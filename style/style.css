@@ -406,6 +406,13 @@ form {
   background: #fff;
 }
 
+#formulario-google {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+}
+
 .form-group {
   margin-bottom: 1.25rem;
   display: flex;
