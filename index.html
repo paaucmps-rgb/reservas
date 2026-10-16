@@ -250,11 +250,6 @@
 
         const formularioGoogle = document.getElementById('formulario-google');
         let primeraCargaFormulario = true;
-        let posicionPaginaAntesDelEnvio;
-
-        formularioGoogle.addEventListener('focus', () => {
-            posicionPaginaAntesDelEnvio = window.scrollY;
-        });
 
         formularioGoogle.addEventListener('load', () => {
             if (primeraCargaFormulario) {
@@ -262,9 +257,10 @@
                 return;
             }
 
-            if (posicionPaginaAntesDelEnvio !== undefined) {
-                window.scrollTo(0, posicionPaginaAntesDelEnvio);
-            }
+            formularioGoogle.closest('.formulario-reserva-card').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         });
 
         function cambiarVista(vistaId) {
