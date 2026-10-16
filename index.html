@@ -50,7 +50,16 @@
                 <article class="card-salon">
 <!-- Creado por Alejandra Carmona -->
 <!-- Se trata de la subida de imágenes, en este caso del salón -->
-                  <img src="documentos/imagenes/salon.jpeg" alt="Salón A">
+                    <div class="galeria-salon" data-galeria aria-label="Galería de fotos del Salón A">
+                        <img src="documentos/imagenes/salon.jpeg" alt="Interior del Salón A">
+                        <img src="documentos/imagenes/terraza.jpeg" alt="Terraza común de los salones" hidden>
+                        <button type="button" class="galeria-flecha galeria-anterior" data-anterior aria-label="Foto anterior del Salón A">&lsaquo;</button>
+                        <button type="button" class="galeria-flecha galeria-siguiente" data-siguiente aria-label="Foto siguiente del Salón A">&rsaquo;</button>
+                        <div class="galeria-indicadores" aria-label="Seleccionar foto">
+                            <button type="button" class="galeria-punto activo" data-foto="0" aria-label="Mostrar foto 1 del Salón A" aria-pressed="true"></button>
+                            <button type="button" class="galeria-punto" data-foto="1" aria-label="Mostrar foto 2 del Salón A" aria-pressed="false"></button>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div>
                             <span class="etiqueta">SALÓN A</span>
@@ -69,7 +78,16 @@
 
                 <article class="card-salon">
 <!-- Creado por Alejandra Carmona -->                  
-                    <img src="documentos/imagenes/puerta.jpeg" alt="Salón B">
+                    <div class="galeria-salon" data-galeria aria-label="Galería de fotos del Salón B">
+                        <img src="documentos/imagenes/puerta.jpeg" alt="Entrada del Salón B">
+                        <img src="documentos/imagenes/terraza.jpeg" alt="Terraza común de los salones" hidden>
+                        <button type="button" class="galeria-flecha galeria-anterior" data-anterior aria-label="Foto anterior del Salón B">&lsaquo;</button>
+                        <button type="button" class="galeria-flecha galeria-siguiente" data-siguiente aria-label="Foto siguiente del Salón B">&rsaquo;</button>
+                        <div class="galeria-indicadores" aria-label="Seleccionar foto">
+                            <button type="button" class="galeria-punto activo" data-foto="0" aria-label="Mostrar foto 1 del Salón B" aria-pressed="true"></button>
+                            <button type="button" class="galeria-punto" data-foto="1" aria-label="Mostrar foto 2 del Salón B" aria-pressed="false"></button>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div>
                             <span class="etiqueta">SALÓN B</span>
@@ -202,6 +220,34 @@
 
     <!-- Script de control de pestañas -->
     <script>
+        document.querySelectorAll('[data-galeria]').forEach(galeria => {
+            const fotos = Array.from(galeria.querySelectorAll(':scope > img'));
+            const indicadores = Array.from(galeria.querySelectorAll('[data-foto]'));
+            let fotoActual = 0;
+
+            function mostrarFoto(indice) {
+                fotoActual = (indice + fotos.length) % fotos.length;
+                fotos.forEach((foto, posicion) => {
+                    foto.hidden = posicion !== fotoActual;
+                });
+                indicadores.forEach((indicador, posicion) => {
+                    const activo = posicion === fotoActual;
+                    indicador.classList.toggle('activo', activo);
+                    indicador.setAttribute('aria-pressed', String(activo));
+                });
+            }
+
+            galeria.querySelector('[data-anterior]').addEventListener('click', () => {
+                mostrarFoto(fotoActual - 1);
+            });
+            galeria.querySelector('[data-siguiente]').addEventListener('click', () => {
+                mostrarFoto(fotoActual + 1);
+            });
+            indicadores.forEach((indicador, indice) => {
+                indicador.addEventListener('click', () => mostrarFoto(indice));
+            });
+        });
+
         const formularioGoogle = document.getElementById('formulario-google');
         let primeraCargaFormulario = true;
         let posicionPaginaAntesDelEnvio;

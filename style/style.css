@@ -308,6 +308,69 @@ article p strong {
   object-fit: cover;
 }
 
+.galeria-salon {
+  position: relative;
+}
+
+.galeria-salon > img:not([hidden]) {
+  display: block;
+}
+
+.galeria-flecha {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.galeria-anterior {
+  left: 0.75rem;
+}
+
+.galeria-siguiente {
+  right: 0.75rem;
+}
+
+.galeria-indicadores {
+  position: absolute;
+  right: 0;
+  bottom: 0.75rem;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.galeria-punto {
+  width: 0.7rem;
+  height: 0.7rem;
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+}
+
+.galeria-punto.activo {
+  background: #fff;
+}
+
+.galeria-flecha:focus-visible,
+.galeria-punto:focus-visible {
+  outline: 3px solid #005fcc;
+  outline-offset: 2px;
+}
+
 .card-body {
   padding: 1.5rem;
   display: flex;
