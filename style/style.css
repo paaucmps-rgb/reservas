@@ -538,6 +538,20 @@ input:focus {
   display: none;
 }
 
+.formulario-reserva-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#formulario-google {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  border: 0;
+}
+
 /* Footer y Estilos de Blas */
 footer {
   text-align: center;
